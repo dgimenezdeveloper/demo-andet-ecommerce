@@ -3,85 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demostración eCommerce para Andet | FolKode Group</title>
+    <title>ANDET - Equipos y Herramientas Industriales | Perú</title>
+    
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Para iconos -->
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://kit.fontawesome.com/7a6d8cb75c.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
     <header class="header">
         <div class="container">
             <a href="#" class="logo-link">
-                <!-- Coloca el logo de Andet aquí. Búscalo en Google Imágenes o descárgalo de su web -->
-                <img src="images/logo-ander.png" alt="Andet Logo" class="logo-img">
+                <img src="/images/logo-ander.png" alt="Andet Logo" class="logo-img">
             </a>
             <nav class="navbar">
+                <a href="#inicio">Inicio</a>
                 <a href="#productos">Productos</a>
                 <a href="#categorias">Categorías</a>
                 <a href="#nosotros">Nosotros</a>
                 <a href="#contacto">Contacto</a>
             </nav>
             <div class="header-icons">
-                <a href="#" aria-label="Buscar"><i class="fas fa-search"></i></a>
-                <a href="#" aria-label="Carrito"><i class="fas fa-shopping-cart"></i> <span>0</span></a>
+                <button class="search-btn" aria-label="Buscar">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="cart-icon" aria-label="Carrito de Compras" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-counter">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Barra de búsqueda -->
+        <div class="search-bar" id="searchBar">
+            <div class="container">
+                <input type="text" id="searchInput" placeholder="Buscar productos..." onkeyup="searchProducts()">
+                <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
             </div>
         </div>
     </header>
 
+    <!-- Carrito lateral -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Carrito de Compras</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Tu carrito está vacío</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: S/ <span id="cartTotal">0.00</span></strong>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">
+                <i class="fas fa-credit-card"></i> Proceder al Pago
+            </button>
+        </div>
+    </div>
+
     <main>
-        <section class="hero">
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <h1>Equipos y Herramientas Industriales</h1>
+                <p>Soluciones integrales para la industria con la calidad y confianza de ANDET</p>
+                <div class="hero-buttons">
+                    <a href="#productos" class="cta-button primary">Ver Catálogo</a>
+                    <a href="#contacto" class="cta-button secondary">Contactar Ventas</a>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>25+</h3>
+                    <p>Años de experiencia</p>
+                </div>
+                <div class="stat">
+                    <h3>1000+</h3>
+                    <p>Productos disponibles</p>
+                </div>
+                <div class="stat">
+                    <h3>500+</h3>
+                    <p>Clientes satisfechos</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtros y categorías -->
+        <section id="categorias" class="filters-section">
             <div class="container">
-                <h1>Soluciones Integrales para tus Proyectos</h1>
-                <p>Equipos y materiales de alta calidad, inspirados en la excelencia de Andet.</p>
-                <a href="#productos" class="cta-button">Ver Productos</a>
+                <h2>Explorar por Categorías</h2>
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">Todos</button>
+                    <button class="filter-btn" data-category="Herramientas Eléctricas">Herramientas Eléctricas</button>
+                    <button class="filter-btn" data-category="Instrumentos de Medición">Instrumentos</button>
+                    <button class="filter-btn" data-category="Equipos de Soldadura">Soldadura</button>
+                    <button class="filter-btn" data-category="Equipos Neumáticos">Neumáticos</button>
+                    <button class="filter-btn" data-category="Generadores">Generadores</button>
+                </div>
+                <div class="sort-options">
+                    <select id="sortSelect" onchange="sortProducts()">
+                        <option value="default">Ordenar por</option>
+                        <option value="price-low">Precio: Menor a Mayor</option>
+                        <option value="price-high">Precio: Mayor a Menor</option>
+                        <option value="name">Nombre A-Z</option>
+                        <option value="name-desc">Nombre Z-A</option>
+                    </select>
+                </div>
             </div>
         </section>
 
         <section id="productos" class="product-grid">
             <div class="container">
-                <h2>Nuestros Productos Destacados</h2>
-                <div class="grid-container">
-                    <!-- Producto 1 -->
-                    <div class="product-card">
-                        <img src="images/product1.jpg" alt="Producto 1" class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-name">Tablero Eléctrico Industrial</h3>
-                            <p class="product-category">Tableros y Gabinetes</p>
-                            <p class="product-price">$ 1,250.00</p>
-                            <button class="add-to-cart-button">Añadir al Carrito</button>
+                <h2>Nuestros Productos</h2>
+                <div class="grid-container" id="productGrid">
+                    <!-- JavaScript llenará esta área -->
+                </div>
+
+                <div id="pagination-container">
+                    <!-- JavaScript llenará esta área con botones -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal de producto -->
+        <div class="product-modal" id="productModal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeProductModal()">&times;</span>
+                <div class="modal-body">
+                    <div class="modal-image">
+                        <img id="modalImage" src="" alt="">
+                    </div>
+                    <div class="modal-info">
+                        <h2 id="modalTitle"></h2>
+                        <p class="modal-category" id="modalCategory"></p>
+                        <div class="modal-price">
+                            <span class="current-price" id="modalPrice"></span>
+                            <span class="old-price" id="modalOldPrice"></span>
+                        </div>
+                        <p class="modal-description" id="modalDescription"></p>
+                        <div class="modal-specs" id="modalSpecs"></div>
+                        <div class="modal-actions">
+                            <div class="quantity-selector">
+                                <button onclick="decreaseQuantity()">-</button>
+                                <input type="number" id="modalQuantity" value="1" min="1">
+                                <button onclick="increaseQuantity()">+</button>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCartFromModal()">
+                                <i class="fas fa-shopping-cart"></i>
+                                Añadir al Carrito
+                            </button>
+                        </div>
+                        <div class="modal-info-tabs">
+                            <div class="tab-buttons">
+                                <button class="tab-btn active" onclick="showTab('specs')">Especificaciones</button>
+                                <button class="tab-btn" onclick="showTab('warranty')">Garantía</button>
+                                <button class="tab-btn" onclick="showTab('shipping')">Envío</button>
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="specsTab"></div>
+                                <div class="tab-pane" id="warrantyTab">
+                                    <p>Garantía oficial de <span id="warrantyPeriod"></span></p>
+                                    <p>Soporte técnico especializado</p>
+                                    <p>Repuestos originales disponibles</p>
+                                </div>
+                                <div class="tab-pane" id="shippingTab">
+                                    <p>Envío gratis a Lima Metropolitana en compras mayores a S/ 500</p>
+                                    <p>Entrega en 24-48 horas en Lima</p>
+                                    <p>Envío a provincias disponible</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Producto 2 -->
-                    <div class="product-card">
-                        <img src="images/product2.jpg" alt="Producto 2" class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-name">Interruptor Termomagnético</h3>
-                            <p class="product-category">Interruptores</p>
-                            <p class="product-price">$ 45.90</p>
-                            <button class="add-to-cart-button">Añadir al Carrito</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Nosotros -->
+        <section id="nosotros" class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Sobre ANDET</h2>
+                        <p>Con más de 25 años de experiencia en el mercado peruano, ANDET se ha consolidado como líder en la distribución de equipos y herramientas industriales de alta calidad.</p>
+                        <p>Nos especializamos en brindar soluciones integrales para la industria, construcción, minería y sectores afines, respaldados por un equipo técnico altamente calificado.</p>
+                        <div class="about-features">
+                            <div class="feature">
+                                <i class="fas fa-medal"></i>
+                                <h4>Calidad Garantizada</h4>
+                                <p>Productos certificados y garantía oficial</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-shipping-fast"></i>
+                                <h4>Entrega Rápida</h4>
+                                <p>Despacho inmediato y envío seguro</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-headset"></i>
+                                <h4>Soporte Técnico</h4>
+                                <p>Asesoría especializada pre y post venta</p>
+                            </div>
                         </div>
                     </div>
-                    <!-- Producto 3 -->
-                    <div class="product-card">
-                        <img src="images/product3.jpg" alt="Producto 3" class="product-image">
-                         <div class="product-info">
-                            <h3 class="product-name">Luminaria LED para Exterior</h3>
-                            <p class="product-category">Iluminación</p>
-                            <p class="product-price">$ 120.50</p>
-                            <button class="add-to-cart-button">Añadir al Carrito</button>
+                    <div class="about-image">
+                        <img src="https://andet.com.pe/wp-content/uploads/2023/04/mision-vision-andet.jpg" alt="ANDET Empresa">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Contacto -->
+        <section id="contacto" class="contact-section">
+            <div class="container">
+                <h2>Contáctanos</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Dirección</h4>
+                                <p>Av. Argentina 2833, Lima - Perú</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p>+51 1 463-2550</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>ventas@andet.com.pe</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Horario</h4>
+                                <p>Lun - Vie: 8:00 AM - 6:00 PM<br>Sáb: 8:00 AM - 1:00 PM</p>
+                            </div>
                         </div>
                     </div>
-                    <!-- Producto 4 -->
-                    <div class="product-card">
-                        <img src="images/product4.jpg" alt="Producto 4" class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-name">Cable de Energía Vulcanizado</h3>
-                            <p class="product-category">Cables y Conductores</p>
-                            <p class="product-price">$ 15.80 / metro</p>
-                            <button class="add-to-cart-button">Añadir al Carrito</button>
+                    <form class="contact-form" onsubmit="submitContactForm(event)">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Nombre completo" required>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" placeholder="Teléfono">
+                        </div>
+                        <div class="form-group">
+                            <select name="subject" required>
+                                <option value="">Seleccionar asunto</option>
+                                <option value="cotizacion">Solicitar cotización</option>
+                                <option value="soporte">Soporte técnico</option>
+                                <option value="informacion">Información de productos</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" rows="5" placeholder="Mensaje" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar Mensaje
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -89,10 +286,54 @@
 
     <footer class="footer">
         <div class="container">
-            <p>© 2024 Demo para Andet. Desarrollado con ❤️ por <strong>FolKode Group</strong>.</p>
-            <p>Este es un sitio de demostración y no una tienda funcional.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="https://andet.com.pe/wp-content/uploads/2023/04/Logo-Andet.png" alt="Andet" class="footer-logo">
+                    <p>Equipos y herramientas industriales de alta calidad para profesionales exigentes.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="#productos">Herramientas Eléctricas</a></li>
+                        <li><a href="#productos">Equipos de Soldadura</a></li>
+                        <li><a href="#productos">Instrumentos de Medición</a></li>
+                        <li><a href="#productos">Generadores</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +51 1 463-2550</li>
+                        <li><i class="fas fa-envelope"></i> ventas@andet.com.pe</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Argentina 2833, Lima</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ANDET. Todos los derechos reservados. | Desarrollado por <strong>FolKode Group</strong></p>
+            </div>
         </div>
     </footer>
+
+    <!-- Overlay para carrito -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+    <script src="app.js"></script>
 
 </body>
 </html>
