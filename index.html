@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,21 @@
 
     <!-- Librería de Animaciones (AOS) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+
     <!-- Hoja de Estilos Personalizada -->
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- Fuentes de Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
     <!-- Iconos de Font Awesome -->
     <script src="https://kit.fontawesome.com/7a6d8cb75c.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 
     <!-- ======================= HEADER ======================= -->
@@ -63,7 +67,8 @@
         <section id="inicio" class="hero">
             <div class="hero-content" data-aos="fade-up">
                 <h1>Soluciones Industriales que Impulsan tu Negocio</h1>
-                <p>Equipos de alta tecnología, energía renovable y domótica. La calidad y el soporte que tu proyecto necesita.</p>
+                <p>Equipos de alta tecnología, energía renovable y domótica. La calidad y el soporte que tu proyecto
+                    necesita.</p>
                 <a href="#productos" class="cta-button">Explorar Productos <i class="fas fa-arrow-right"></i></a>
             </div>
         </section>
@@ -72,7 +77,7 @@
         <section id="productos" class="product-grid">
             <div class="container">
                 <h2 data-aos="fade-up">Nuestro Catálogo</h2>
-                
+
                 <!-- Contenedor para la Grilla de Productos -->
                 <div class="grid-container" id="productGrid" data-aos="fade-up" data-aos-delay="200">
                     <!-- Los productos se cargarán aquí desde 'products.json' -->
@@ -87,16 +92,19 @@
         <section id="nosotros" class="about-section">
             <div class="container" data-aos="fade-up">
                 <div class="about-image">
-                    <img src="https://andet.com.pe/wp-content/uploads/2024/05/equipo-andet-mineria-e1715891783307.jpg" alt="Equipo de Andet">
+                    <img src="https://andet.com.pe/wp-content/uploads/2024/05/equipo-andet-mineria-e1715891783307.jpg"
+                        alt="Equipo de Andet">
                 </div>
                 <div class="about-text">
                     <h2>Innovación y Experiencia a tu Servicio</h2>
-                    <p>En ANDET, fusionamos más de 25 años de trayectoria con las últimas tecnologías para ofrecer soluciones robustas y eficientes en los sectores de energía, industrial y construcción. No solo proveemos equipos; creamos alianzas estratégicas para asegurar el éxito de cada proyecto.</p>
+                    <p>En ANDET, fusionamos más de 25 años de trayectoria con las últimas tecnologías para ofrecer
+                        soluciones robustas y eficientes en los sectores de energía, industrial y construcción. No solo
+                        proveemos equipos; creamos alianzas estratégicas para asegurar el éxito de cada proyecto.</p>
                     <a href="#contacto" class="cta-button secondary">Contáctanos</a>
                 </div>
             </div>
         </section>
-        
+
         <!-- ======================= CONTACTO ======================= -->
         <section id="contacto" class="contact-section">
             <!-- (Se mantiene la sección de tu archivo original) -->
@@ -114,22 +122,31 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeProductModal()">×</span>
             <div class="modal-body">
-                <div class="modal-image">
-                    <img id="modalImage" src="" alt="Imagen de producto">
+
+                <!-- Nueva Estructura de Galería -->
+                <div class="modal-image-gallery">
+                    <div class="modal-main-image">
+                        <img id="modalMainImage" src="" alt="Imagen principal del producto">
+                    </div>
+                    <div class="modal-thumbnails" id="modalThumbnails">
+                        <!-- Las miniaturas se insertarán aquí con JavaScript -->
+                    </div>
                 </div>
+
                 <div class="modal-info">
                     <h2 id="modalTitle"></h2>
                     <p class="modal-category" id="modalCategory"></p>
-                    <p class="modal-description" id="modalDescription">Una descripción detallada del producto aparecerá aquí, destacando sus principales características y beneficios para el usuario final.</p>
+                    <p class="modal-description" id="modalDescription">Una descripción detallada del producto aparecerá
+                        aquí, destacando sus principales características y beneficios para el usuario final.</p>
                     <div class="modal-actions">
                         <div class="quantity-selector">
                             <button onclick="decreaseQuantity()">-</button>
                             <input type="number" id="modalQuantity" value="1" min="1">
                             <button onclick="increaseQuantity()">+</button>
                         </div>
+                        <!-- Botón de cotización sin icono -->
                         <button class="add-to-cart-btn" onclick="addToCartFromModal()">
-                            <i class="fas fa-plus"></i>
-                            Añadir a la Cotización
+                            COTIZAR
                         </button>
                     </div>
                 </div>
@@ -141,12 +158,13 @@
     <!-- Scripts al final del body para mejor rendimiento -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      AOS.init({
-        duration: 800, // Duración de las animaciones
-        once: true,    // Animar solo una vez
-        offset: 50,    // Se activa un poco antes de llegar al elemento
-      });
+        AOS.init({
+            duration: 800, // Duración de las animaciones
+            once: true,    // Animar solo una vez
+            offset: 50,    // Se activa un poco antes de llegar al elemento
+        });
     </script>
     <script src="app.js"></script>
 </body>
+
 </html>

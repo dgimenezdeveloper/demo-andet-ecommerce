@@ -104,24 +104,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA DEL MODAL ---
     window.openProductModal = (product) => {
-        const modalImageElement = document.getElementById('modalImage');
-        const modalTitleElement = document.getElementById('modalTitle');
-        const modalCategoryElement = document.getElementById('modalCategory');
-        const imageUrl = product.imagen;
-        modalImageElement.src = imageUrl;
-
-        modalImageElement.alt = product.nombre;
-        
-        modalTitleElement.textContent = product.nombre;
-        modalCategoryElement.textContent = product.categoria || "Equipos Industriales";
-        
+        // Obtenemos los elementos del DOM que necesitamos
+        const modalMainImage = document.getElementById('modalMainImage');
+        const modalThumbnailsContainer = document.getElementById('modalThumbnails');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalCategory = document.getElementById('modalCategory');
         const addToCartBtn = modal.querySelector('.add-to-cart-btn');
-        document.getElementById('modalQuantity').value = 1;
+
+        // Actualizamos título y categoría
+        modalTitle.textContent = product.nombre;
+        modalCategory.textContent = product.categoria || "Equipos Industriales";
+
+        // --- LÓGICA DE LA GALERÍA ---
+        // Limpiamos miniaturas anteriores
+        modalThumbnailsContainer.innerHTML = '';
+        
+        // El producto puede tener un array de imágenes o solo una.
+        // Si no existe un array de imágenes, creamos uno de demostración repitiendo la imagen principal 4 veces.
+        const imageList = product.gallery_images || [product.imagen, product.imagen, product.imagen, product.imagen];
+        
+        // Ponemos la primera imagen como la principal al abrir
+        modalMainImage.src = imageList[0];
+        
+        // Creamos una miniatura por cada imagen en la lista
+        imageList.forEach((imgSrc, index) => {
+            const thumb = document.createElement('img');
+            thumb.src = imgSrc;
+            thumb.alt = `Vista ${index + 1} de ${product.nombre}`;
+            thumb.className = 'modal-thumbnail-img';
+            
+            // La primera miniatura empieza como activa
+            if (index === 0) {
+                thumb.classList.add('active');
+            }
+            
+            // Evento de clic para cada miniatura
+            thumb.onclick = () => {
+                // Efecto de fade out para la imagen principal
+                modalMainImage.style.opacity = '0';
+
+                setTimeout(() => {
+                    // Cambiamos la imagen principal y la hacemos visible de nuevo
+                    modalMainImage.src = imgSrc;
+                    modalMainImage.style.opacity = '1';
+                }, 150); // El tiempo debe ser menor a la transición en CSS
+
+                // Actualizamos la clase 'active' en las miniaturas
+                modalThumbnailsContainer.querySelector('.active').classList.remove('active');
+                thumb.classList.add('active');
+            };
+            
+            modalThumbnailsContainer.appendChild(thumb);
+        });
+
+        // Lógica para añadir al carrito (se mantiene igual, pero más limpia)
+        document.getElementById('modalQuantity').value = 1; // Reiniciar cantidad
         addToCartBtn.onclick = () => {
             const quantity = parseInt(document.getElementById('modalQuantity').value);
             addToCart(product.id, quantity);
         };
         
+        // Mostramos el modal
         modal.classList.add('active');
         overlay.classList.add('active');
     };
