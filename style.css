@@ -616,3 +616,140 @@ footer {
     color: #666;
     margin-top: 20px;
 }
+
+/* --- Sección de Carrusel de Categorías --- */
+.category-carousel-section {
+    position: relative;
+    padding: 60px 0;
+    background-image: url('https://andet.com.pe/wp-content/uploads/2023/12/textura-3.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden; /* Muy importante para que el carrusel funcione */
+}
+
+.category-title-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.category-title-chip {
+    display: inline-block;
+    background-color: var(--secondary-color); /* Rojo Andet */
+    color: var(--text-color-light);
+    padding: 10px 30px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+}
+
+.category-carousel-wrapper {
+    width: 90%;
+    max-width: 1100px; /* Ancho máximo para el carrusel */
+    margin: 0 auto;
+    position: relative;
+}
+
+.category-carousel-track {
+    display: flex;
+    /* La magia de la animación viene de aquí */
+    /* Lo configuraremos para que dure 30 segundos una vuelta completa */
+    animation: scroll-infinity 30s linear infinite;
+}
+
+.category-carousel-wrapper:hover .category-carousel-track {
+    animation-play-state: paused; /* Pausamos la animación al pasar el mouse */
+}
+
+/* Definición de la animación del carrusel */
+@keyframes scroll-infinity {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Se moverá la mitad de su longitud total (ya que clonaremos los items) */
+        transform: translateX(calc(-250px * 8)); /* 250px por tarjeta, 8 tarjetas */
+    }
+}
+
+
+.category-card {
+    flex: 0 0 250px; /* Ancho fijo de 250px para cada tarjeta */
+    margin: 0 15px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.category-card .img-container {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: #fdfdfd;
+}
+
+.category-card .img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.category-card .category-name {
+    color: var(--text-color-dark);
+    font-weight: 700;
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.category-card .cta-footer {
+    background: var(--secondary-color);
+    color: var(--text-color-light);
+    padding: 12px 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.category-card:hover .cta-footer {
+    background: var(--accent-color); /* Naranja en hover */
+}
+
+/* Botones de navegación del carrusel */
+.carousel-nav {
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+    background: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    display: none; /* Los ocultamos por defecto ya que la animación es automática */
+}
+.carousel-nav.prev { left: 5%; }
+.carousel-nav.next { right: 5%; }
+
+.carousel-nav:hover {
+    background: var(--accent-color);
+    transform: translateY(-50%) scale(1.1);
+}

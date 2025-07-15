@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartSidebar = document.getElementById('cartSidebar');
     const cartItemsContainer = document.getElementById('cartItems');
     const cartCounter = document.getElementById('cartCounter');
+    const categoryTrack = document.getElementById('category-carousel-track');
 
     /**
      * Carga los productos desde el archivo JSON
@@ -250,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INICIALIZACIÓN ---
     fetchProducts();
+    setupCategoryCarousel();
     document.addEventListener('keydown', (e) => {
         if (e.key === "Escape") {
             closeProductModal();
@@ -260,3 +262,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function getCategoryData() {
+        return [
+            { name: "Medidor de Energía", img: "https://andet.com.pe/wp-content/uploads/2023/12/monofasico.png"},
+            { name: "Medidor de Gas", img: "https://andet.com.pe/wp-content/uploads/2023/12/medidor-de-gas-e1704221159389.png"},
+            { name: "Caja Porta Medidor", img: "https://andet.com.pe/wp-content/uploads/2023/12/caja-de-medidor.png"},
+            { name: "Domótica iSmart", img: "https://andet.com.pe/wp-content/uploads/2023/12/camara-de-seguridad.png"},
+            { name: "Inversor Híbrido", img: "imagenes_productos/002_Inversor_Híbrido.png"}, // Reutilizamos imágenes
+            { name: "Batería de Litio", img: "imagenes_productos/001_Batería_de_Litio.png"},
+            { name: "Inversor On Grid", img: "imagenes_productos/003_Inversor_On_Grid.png"},
+            { name: "Luces Inteligentes", img: "imagenes_productos/005_Tira_de_luces_inteligente.png"},
+        ];
+    }
+function setupCategoryCarousel() {
+        if (!categoryTrack) return; // Si no existe el elemento, no hace nada
+
+        const categories = getCategoryData();
+        const allCategories = [...categories, ...categories]; // ¡Duplicamos para el efecto infinito!
+        
+        categoryTrack.innerHTML = ''; // Limpiamos el contenedor
+        
+        allCategories.forEach(cat => {
+            const card = document.createElement('div');
+            card.className = 'category-card';
+            card.innerHTML = `
+                <div class="img-container">
+                    <img src="${cat.img}" alt="${cat.name}">
+                </div>
+                <p class="category-name">${cat.name}</p>
+                <div class="cta-footer">
+                    Ver Categoría
+                </div>
+            `;
+            categoryTrack.appendChild(card);
+        });
+
+        // Actualizamos la animación en CSS para que coincida con el número real de tarjetas
+        const totalCards = categories.length; // Usamos el largo original para el cálculo
+        const cardWidth = 250; // Ancho definido en CSS
+        const margin = 30; // 15px a cada lado
+        const totalWidth = totalCards * (cardWidth + margin);
+
+        document.documentElement.style.setProperty('--scroll-width', `-${totalWidth}px`);
+        categoryTrack.style.animationDuration = `${totalCards * 3}s`; // Ajusta la velocidad dinámicamente
+    }
