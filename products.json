@@ -1,74 +1,244 @@
 [
   {
     "id": 1,
-    "nombre": "Batería de Litio",
+    "nombre": "Batería de Litio de Alta Capacidad",
+    "codigo_sku": "AND-LVTK-BAT-01",
+    "categoria": "Baterías y Almacenamiento",
+    "precio_referencial": "2,500.00",
+    "descripcion_corta": "Almacenamiento energético residencial de alta densidad, ideal para sistemas solares.",
+    "descripcion_larga": "El sistema de batería BLF51-5 LV es perfecto para nuevas instalaciones de almacenamiento de energía residencial. Gracias a su alta densidad energética y su diseño compacto para montaje en pared, este sistema optimiza el uso del espacio, tanto para instalaciones interiores como exteriores.",
+    "especificaciones": [
+      {"propiedad": "Capacidad Nominal", "valor": "5.12 kWh"},
+      {"propiedad": "Voltaje", "valor": "51.2V"},
+      {"propiedad": "Tipo de Batería", "valor": "LiFePO4"},
+      {"propiedad": "Ciclos de Vida", "valor": "> 6000 ciclos al 90% DOD"}
+    ],
+    "disponibilidad": "En Stock",
     "imagen": "imagenes_productos/001_Batería_de_Litio.png",
-    "imagen_url": "https://andet.com.pe/wp-content/uploads/2025/01/F.png"
+    "gallery_images": [
+      "imagenes_productos/001_Batería_de_Litio.png",
+      "https://livoltek.com/wp-content/uploads/2023/11/%E5%8A%A8%E7%94%BB11-30.gif",
+      "https://livoltek.com/wp-content/uploads/2023/12/1.jpg"
+    ]
   },
   {
     "id": 2,
-    "nombre": "Inversor Híbrido",
+    "nombre": "Inversor Híbrido Trifásico",
+    "codigo_sku": "AND-LVTK-INV-02H",
+    "categoria": "Inversores Solares",
+    "precio_referencial": "1,850.00",
+    "descripcion_corta": "Solución todo-en-uno para gestión de energía solar, baterías y red eléctrica.",
+    "descripcion_larga": "Este inversor híbrido trifásico ofrece una solución integral y flexible para aplicaciones solares, permitiendo un control inteligente del flujo de energía, optimizando el autoconsumo y garantizando el suministro durante cortes de red.",
+    "especificaciones": [
+      {"propiedad": "Potencia", "valor": "10 kW"},
+      {"propiedad": "Fases", "valor": "Trifásico"},
+      {"propiedad": "Eficiencia MPPT", "valor": "99.9%"},
+      {"propiedad": "Conectividad", "valor": "WiFi / RS485 / CAN"}
+    ],
+    "disponibilidad": "En Stock",
     "imagen": "imagenes_productos/002_Inversor_Híbrido.png",
-    "imagen_url": "https://andet.com.pe/wp-content/uploads/2025/01/Front-3.png"
+    "gallery_images": [
+      "imagenes_productos/002_Inversor_Híbrido.png"
+    ]
   },
   {
     "id": 3,
-    "nombre": "Inversor On Grid",
+    "nombre": "Inversor On-Grid de Alta Eficiencia",
+    "codigo_sku": "AND-LVTK-INV-03G",
+    "categoria": "Inversores Solares",
+    "precio_referencial": "1,200.00",
+    "descripcion_corta": "Inyecta la energía generada por tus paneles solares directamente a la red eléctrica.",
+    "descripcion_larga": "Diseñado para la máxima eficiencia y fiabilidad, este inversor On-Grid es la elección perfecta para reducir la factura eléctrica en hogares y comercios. Su diseño compacto y monitoreo vía App lo hacen fácil de instalar y gestionar.",
+    "especificaciones": [
+      {"propiedad": "Potencia Máxima DC", "valor": "8 kW"},
+      {"propiedad": "Nº de MPPTs", "valor": "2"},
+      {"propiedad": "Grado de Protección", "valor": "IP65"},
+      {"propiedad": "Garantía", "valor": "5 años (Extensible)"}
+    ],
+    "disponibilidad": "Stock Limitado",
     "imagen": "imagenes_productos/003_Inversor_On_Grid.png",
-    "imagen_url": "https://andet.com.pe/wp-content/uploads/2025/01/Inversor-.png"
+    "gallery_images": [
+        "imagenes_productos/003_Inversor_On_Grid.png"
+    ]
   },
   {
     "id": 4,
-    "nombre": "Inversor Off Grid",
+    "nombre": "Inversor Off-Grid para Autonomía",
+    "codigo_sku": "AND-LVTK-INV-04F",
+    "categoria": "Inversores Solares",
+    "precio_referencial": "980.00",
+    "descripcion_corta": "Ideal para sistemas aislados que requieren independencia total de la red eléctrica.",
+    "descripcion_larga": "Proporciona energía estable y continua en ubicaciones remotas sin acceso a la red. Compatible con generadores y baterías, este inversor Off-Grid es la solución robusta para una total autonomía energética.",
+    "especificaciones": [
+      {"propiedad": "Potencia de Salida", "valor": "5000W"},
+      {"propiedad": "Voltaje de Batería", "valor": "48VDC"},
+      {"propiedad": "Forma de Onda", "valor": "Onda Sinusoidal Pura"},
+      {"propiedad": "Controlador de Carga", "valor": "MPPT Integrado"}
+    ],
+    "disponibilidad": "En Stock",
     "imagen": "imagenes_productos/004_Inversor_Off_Grid.png",
-    "imagen_url": "https://andet.com.pe/wp-content/uploads/2025/01/6-2.png"
+    "gallery_images": [
+        "imagenes_productos/004_Inversor_Off_Grid.png"
+    ]
   },
   {
     "id": 5,
-    "nombre": "Tira de luces inteligente",
+    "nombre": "Tira de Luces LED Inteligente RGBW",
+    "codigo_sku": "AND-ISMT-LED-05",
+    "categoria": "Domótica e Iluminación",
+    "precio_referencial": "150.00",
+    "descripcion_corta": "Crea ambientes únicos con millones de colores controlados desde tu smartphone.",
+    "descripcion_larga": "Transforma cualquier espacio con esta tira LED inteligente. Conéctala a tu red WiFi y controla la intensidad, el color y crea escenas dinámicas a través de la App. Compatible con Alexa y Google Assistant para un control total por voz.",
+    "especificaciones": [
+      {"propiedad": "Longitud", "valor": "5 metros"},
+      {"propiedad": "Colores", "valor": "RGB + Blanco Cálido/Frío"},
+      {"propiedad": "Control", "valor": "App / Voz (Alexa, Google)"},
+      {"propiedad": "Alimentación", "valor": "USB 5V"}
+    ],
+    "disponibilidad": "En Stock",
     "imagen": "imagenes_productos/005_Tira_de_luces_inteligente.png",
-    "imagen_url": "https://andet.com.pe/wp-content/uploads/2024/07/Sin-titulo-3-2048x2048-1.png"
+    "gallery_images": [
+      "imagenes_productos/005_Tira_de_luces_inteligente.png"
+    ]
   },
   {
     "id": 6,
-    "nombre": "TIRA DE GUIRNALDAS INTELIGENTES PARA EXTERIOR RGB",
+    "nombre": "Guirnaldas Inteligentes para Exterior",
+    "codigo_sku": "AND-ISMT-GRL-06",
+    "categoria": "Domótica e Iluminación",
+    "precio_referencial": "220.00",
+    "descripcion_corta": "Iluminación inteligente y resistente para tus terrazas, jardines y eventos.",
+    "descripcion_larga": "Con grado de protección IP65, estas guirnaldas están diseñadas para soportar las condiciones del exterior. Controla cada foco individualmente, ajusta el brillo y programa horarios, todo desde la comodidad de tu celular.",
+    "especificaciones": [
+      {"propiedad": "Longitud", "valor": "15 metros"},
+      {"propiedad": "Nº de Focos", "valor": "15"},
+      {"propiedad": "Protección", "valor": "IP65 (Resistente a la intemperie)"},
+      {"propiedad": "Compatibilidad", "valor": "Amazon Alexa, Google Home"}
+    ],
+    "disponibilidad": "En Stock",
     "imagen": "imagenes_productos/006_TIRA_DE_GUIRNALDAS_INTELIGENTES_PARA_EXTERIOR_RGB.jpg",
-    "imagen_url": "https://andet.com.pe/wp-content/uploads/2024/07/SH-LSB_1.jpg"
+    "gallery_images": [
+      "imagenes_productos/006_TIRA_DE_GUIRNALDAS_INTELIGENTES_PARA_EXTERIOR_RGB.jpg"
+    ]
   },
   {
     "id": 7,
-    "nombre": "Reflector inteligente sin marco 30W",
+    "nombre": "Reflector Inteligente 30W",
+    "codigo_sku": "AND-ISMT-RFL-07",
+    "categoria": "Domótica e Iluminación",
+    "precio_referencial": "180.00",
+    "descripcion_corta": "Potente reflector para exteriores con control inteligente de color y programación.",
+    "descripcion_larga": "Ilumina fachadas, patios o áreas de trabajo con este potente reflector de 30W. Ofrece luz blanca de alta intensidad y millones de colores RGB para ocasiones especiales. Prográmalo para encenderse y apagarse automáticamente.",
+    "especificaciones": [
+      {"propiedad": "Potencia", "valor": "30W"},
+      {"propiedad": "Flujo Luminoso", "valor": "2700 Lúmenes"},
+      {"propiedad": "Vida Útil", "valor": "25,000 horas"},
+      {"propiedad": "Control", "valor": "App iSmart"}
+    ],
+    "disponibilidad": "En Stock",
     "imagen": "imagenes_productos/007_Reflector_inteligente_sin_marco_30W.png",
-    "imagen_url": "https://andet.com.pe/wp-content/uploads/2024/07/SH-FL30_1.png"
+    "gallery_images": [
+      "imagenes_productos/007_Reflector_inteligente_sin_marco_30W.png"
+    ]
   },
   {
     "id": 8,
-    "nombre": "PLAFON REDONDO INTELIGENTE RGB",
+    "nombre": "Plafón Inteligente Redondo RGB",
+    "codigo_sku": "AND-ISMT-PLF-08R",
+    "categoria": "Plafones Inteligentes",
+    "precio_referencial": "195.00",
+    "descripcion_corta": "Luz principal para habitaciones con control total de ambiente.",
+    "descripcion_larga": "Este plafón redondo no solo es tu luz principal, sino una herramienta para crear atmósferas. Elige desde una luz de trabajo brillante y blanca hasta un rojo tenue para una noche de cine, todo desde tu app.",
+    "especificaciones": [
+      {"propiedad": "Diámetro", "valor": "30 cm"},
+      {"propiedad": "Potencia", "valor": "24W"},
+      {"propiedad": "Función", "valor": "RGB + CCT (Cálido a Frío)"},
+      {"propiedad": "Conectividad", "valor": "WiFi 2.4GHz"}
+    ],
+    "disponibilidad": "Bajo Pedido",
     "imagen": "imagenes_productos/008_PLAFON_REDONDO_INTELIGENTE_RGB.jpg",
-    "imagen_url": "https://andet.com.pe/wp-content/uploads/2024/07/SH-CLRC_1.jpg"
+    "gallery_images": [
+      "imagenes_productos/008_PLAFON_REDONDO_INTELIGENTE_RGB.jpg"
+    ]
   },
   {
     "id": 9,
-    "nombre": "Plafón redondo inteligente CCT",
+    "nombre": "Plafón Redondo Inteligente CCT",
+    "codigo_sku": "AND-ISMT-PLF-09C",
+    "categoria": "Plafones Inteligentes",
+    "precio_referencial": "165.00",
+    "descripcion_corta": "Ajusta la temperatura de la luz blanca de cálida a fría según tu necesidad.",
+    "descripcion_larga": "La solución perfecta para quienes buscan funcionalidad. Adapta la luz de tu espacio desde una luz cálida y relajante (3000K) hasta una luz de día brillante para máxima concentración (6500K). Regulable en intensidad.",
+    "especificaciones": [
+      {"propiedad": "Diámetro", "valor": "25 cm"},
+      {"propiedad": "Potencia", "valor": "20W"},
+      {"propiedad": "Rango CCT", "valor": "3000K - 6500K"},
+      {"propiedad": "Regulable", "valor": "Sí (0-100%)"}
+    ],
+    "disponibilidad": "En Stock",
     "imagen": "imagenes_productos/009_Plafón_redondo_inteligente_CCT.jpg",
-    "imagen_url": "https://andet.com.pe/wp-content/uploads/2024/07/SH-CLR_1.jpg"
+    "gallery_images": [
+      "imagenes_productos/009_Plafón_redondo_inteligente_CCT.jpg"
+    ]
   },
   {
     "id": 10,
-    "nombre": "Plafón cuadrado inteligente CCT",
+    "nombre": "Plafón Cuadrado Inteligente CCT",
+    "codigo_sku": "AND-ISMT-PLF-10S",
+    "categoria": "Plafones Inteligentes",
+    "precio_referencial": "170.00",
+    "descripcion_corta": "Diseño moderno y minimalista con control de temperatura de luz.",
+    "descripcion_larga": "Con un diseño cuadrado contemporáneo, este plafón ofrece la misma funcionalidad CCT que su contraparte redonda. Ideal para oficinas, cocinas y espacios que requieran una estética de líneas rectas.",
+    "especificaciones": [
+      {"propiedad": "Dimensiones", "valor": "25x25 cm"},
+      {"propiedad": "Potencia", "valor": "22W"},
+      {"propiedad": "Rango CCT", "valor": "3000K - 6500K"},
+      {"propiedad": "Regulable", "valor": "Sí"}
+    ],
+    "disponibilidad": "En Stock",
     "imagen": "imagenes_productos/010_Plafón_cuadrado_inteligente_CCT.jpg",
-    "imagen_url": "https://andet.com.pe/wp-content/uploads/2024/07/SH-CLS_1.jpg"
+    "gallery_images": [
+      "imagenes_productos/010_Plafón_cuadrado_inteligente_CCT.jpg"
+    ]
   },
   {
     "id": 11,
-    "nombre": "Luz inteligente redonda de pared con sensor",
+    "nombre": "Luz de Pared Inteligente con Sensor",
+    "codigo_sku": "AND-ISMT-LUZ-11S",
+    "categoria": "Luminarias con Sensor",
+    "precio_referencial": "95.00",
+    "descripcion_corta": "Se enciende automáticamente al detectar movimiento, ideal para pasillos y escaleras.",
+    "descripcion_larga": "Seguridad y comodidad en una sola pieza. Esta luz de pared se mantiene apagada o a muy baja intensidad y se activa al 100% cuando su sensor PIR detecta movimiento. El tiempo de encendido es configurable vía app.",
+    "especificaciones": [
+      {"propiedad": "Tipo de Sensor", "valor": "PIR (Infrarrojo Pasivo)"},
+      {"propiedad": "Rango de Detección", "valor": "5 metros, 120°"},
+      {"propiedad": "Luz", "valor": "Cálida 3000K"},
+      {"propiedad": "Alimentación", "valor": "Conexión directa 220V"}
+    ],
+    "disponibilidad": "Stock Limitado",
     "imagen": "imagenes_productos/011_Luz_inteligente_redonda_de_pared_con_sensor.jpg",
-    "imagen_url": "https://andet.com.pe/wp-content/uploads/2024/07/SH-SWLR_1.jpg"
+    "gallery_images": [
+      "imagenes_productos/011_Luz_inteligente_redonda_de_pared_con_sensor.jpg"
+    ]
   },
   {
     "id": 12,
-    "nombre": "Luz inteligente redonda de pared",
+    "nombre": "Luz Inteligente Redonda de Pared",
+    "codigo_sku": "AND-ISMT-LUZ-12",
+    "categoria": "Luminarias con Sensor",
+    "precio_referencial": "85.00",
+    "descripcion_corta": "Luz decorativa y funcional para muros, controlable desde tu smartphone.",
+    "descripcion_larga": "Una luz de pared elegante que baña la superficie con una luz suave y difusa. Controla su intensidad y prográmala para que forme parte de tus rutinas de iluminación diarias.",
+    "especificaciones": [
+      {"propiedad": "Material", "valor": "Aluminio"},
+      {"propiedad": "Acabado", "valor": "Negro mate"},
+      {"propiedad": "Potencia", "valor": "8W"},
+      {"propiedad": "Regulable", "valor": "Sí, vía App"}
+    ],
+    "disponibilidad": "En Stock",
     "imagen": "imagenes_productos/012_Luz_inteligente_redonda_de_pared.jpg",
-    "imagen_url": "https://andet.com.pe/wp-content/uploads/2024/07/SH-WLR_1.jpg"
+    "gallery_images": [
+      "imagenes_productos/012_Luz_inteligente_redonda_de_pared.jpg"
+    ]
   }
 ]
