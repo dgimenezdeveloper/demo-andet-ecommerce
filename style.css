@@ -27,6 +27,90 @@ h1, h2 { font-family: var(--font-secondary); font-weight: 700; color: var(--prim
 img { max-width: 100%; height: auto; }
 
 /* --- Header y Navegación --- */
+/* --- Barra Superior (Nueva) --- */
+.header-top-bar {
+    background: #fff;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-top-container {
+    display: flex;
+    justify-content: flex-end; /* Alinea todo a la derecha */
+    align-items: center;
+    gap: 30px;
+}
+
+/* Formulario de Búsqueda */
+.header-search-form {
+    position: relative; /* Anchor para el botón de la lupa */
+    width: 40%;
+    max-width: 500px;
+}
+
+#header-search-input {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0 50px 0 20px; /* Espacio para el placeholder y la lupa */
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#header-search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 75, 141, 0.2);
+}
+
+.header-search-form button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.header-search-form button:hover {
+    color: var(--secondary-color); /* Rojo Andet */
+}
+
+/* Acciones de Usuario */
+.header-user-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--text-color-dark);
+    transition: color 0.3s;
+    font-size: 0.8rem;
+}
+
+.user-action i {
+    font-size: 1.6rem;
+    color: var(--primary-color); /* Color azul oscuro Andet para iconos */
+}
+
+.user-action:hover {
+    color: var(--secondary-color); /* Texto en rojo al pasar el mouse */
+}
+.user-action:hover i {
+    color: var(--secondary-color); /* Icono en rojo al pasar el mouse */
+}
 .header {
     background-color: var(--text-color-light);
     box-shadow: var(--shadow-soft);
@@ -55,21 +139,64 @@ img { max-width: 100%; height: auto; }
 .navbar a:hover, .navbar a.active { color: var(--secondary-color); }
 .navbar a:hover::after { width: 100%; }
 
-/* --- Iconos del Header y Carrito --- */
-.header-icons { display: flex; align-items: center; gap: 20px; }
+/* --- Iconos del Header y Carrito (Nuevo Diseño Branded) --- */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Un poco más de espacio */
+}
+
+/* Estilo general para los botones del header */
 .header-icons button {
-    background: none; border: none; cursor: pointer;
-    font-size: 1.3rem; color: var(--text-color-dark); position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative; /* Clave para el posicionamiento del contador */
+    color: var(--text-color-dark);
     transition: color 0.3s ease;
 }
-.header-icons button:hover { color: var(--secondary-color); }
+
+/* El icono del carrito ahora tiene un tamaño y color base */
+.header-icons .cart-icon i {
+    font-size: 1.5rem;
+}
+
+/* Cuando pasas el mouse sobre CUALQUIER botón del header, cambia de color */
+.header-icons button:hover {
+    color: var(--secondary-color);
+}
+
+/* --- El Nuevo Contador de Carrito --- */
 .cart-counter {
-    position: absolute; top: -5px; right: -10px;
-    background-color: var(--secondary-color); color: var(--text-color-light);
-    border-radius: 50%; width: 20px; height: 20px;
-    font-size: 0.75rem; font-weight: bold;
-    display: flex; justify-content: center; align-items: center;
-    border: 1px solid var(--text-color-light);
+    position: absolute;
+    top: -8px;    /* Lo movemos hacia arriba */
+    right: -10px; /* Lo movemos hacia la derecha */
+
+    /* Estilo del Círculo Rojo */
+    background-color: var(--secondary-color); /* Rojo Andet */
+    color: var(--text-color-light);
+    border-radius: 50%; /* ¡Círculo perfecto! */
+    border: 2px solid var(--text-color-light); /* Borde blanco para resaltar */
+    
+    /* Dimensiones y centrado del número */
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Estilos del texto */
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-family: var(--font-secondary);
+    
+    /* Animación sutil */
+    transition: transform 0.2s ease;
+}
+
+/* Efecto de "pulso" al pasar el mouse sobre el botón del carrito */
+.cart-icon:hover .cart-counter {
+    transform: scale(1.1);
 }
 
 /* --- Hero Section --- */
@@ -618,13 +745,13 @@ footer {
 }
 
 /* --- Sección de Carrusel de Categorías --- */
+/* --- Sección de Carrusel de Categorías - Nuevo Diseño Contenido --- */
 .category-carousel-section {
     position: relative;
     padding: 60px 0;
     background-image: url('https://andet.com.pe/wp-content/uploads/2023/12/textura-3.jpg');
     background-size: cover;
     background-position: center;
-    overflow: hidden; /* Muy importante para que el carrusel funcione */
 }
 
 .category-title-container {
@@ -634,7 +761,7 @@ footer {
 
 .category-title-chip {
     display: inline-block;
-    background-color: var(--secondary-color); /* Rojo Andet */
+    background-color: var(--secondary-color);
     color: var(--text-color-light);
     padding: 10px 30px;
     border-radius: 50px;
@@ -645,38 +772,25 @@ footer {
 }
 
 .category-carousel-wrapper {
-    width: 90%;
-    max-width: 1100px; /* Ancho máximo para el carrusel */
+    /* El contenedor que actúa como ventana, mostrando 4 tarjetas */
+    width: 100%;
+    max-width: 1120px; /* Ancho para 4 tarjetas (4 * 250px + márgenes) */
     margin: 0 auto;
     position: relative;
+    overflow: hidden; /* ¡Clave! Oculta las tarjetas que están fuera de la ventana */
 }
 
 .category-carousel-track {
     display: flex;
-    /* La magia de la animación viene de aquí */
-    /* Lo configuraremos para que dure 30 segundos una vuelta completa */
-    animation: scroll-infinity 30s linear infinite;
+    /* La transición suave se activa cuando cambiamos el 'transform' con JS */
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* ELIMINADA - Ya no necesitamos la animación automática de CSS */
+    /* animation: scroll-infinity 30s linear infinite; */
 }
-
-.category-carousel-wrapper:hover .category-carousel-track {
-    animation-play-state: paused; /* Pausamos la animación al pasar el mouse */
-}
-
-/* Definición de la animación del carrusel */
-@keyframes scroll-infinity {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        /* Usamos la variable que calculamos en JS, con un valor por defecto */
-        transform: translateX(var(--scroll-width, -2240px));
-    }
-}
-
 
 .category-card {
-    flex: 0 0 250px; /* Ancho fijo de 250px para cada tarjeta */
-    margin: 0 15px;
+    flex: 0 0 250px; /* Ancho fijo para cada tarjeta */
+    margin: 0 15px; /* Margen a cada lado */
     background: #fff;
     border-radius: 12px;
     border: 1px solid #e0e0e0;
@@ -685,71 +799,47 @@ footer {
     transition: all 0.3s ease;
     cursor: pointer;
 }
+/* ... el resto de .category-card y sus hover se mantiene igual ... */
 
-.category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-.category-card .img-container {
-    width: 100%;
-    height: 180px;
+/* --- Botones de Navegación AHORA VISIBLES --- */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--secondary-color); /* Rojo Andet */
+    color: white;
+    border: none;
+    width: 45px;   /* Más grandes que los círculos */
+    height: 45px;
+    border-radius: 8px; /* Bordes ligeramente redondeados */
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    background: #fdfdfd;
-}
-
-.category-card .img-container img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.category-card .category-name {
-    color: var(--text-color-dark);
-    font-weight: 700;
-    padding: 15px 10px;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-}
-
-.category-card .cta-footer {
-    background: var(--secondary-color);
-    color: var(--text-color-light);
-    padding: 12px 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease;
-}
-
-.category-card:hover .cta-footer {
-    background: var(--accent-color); /* Naranja en hover */
-}
-
-/* Botones de navegación del carrusel */
-.carousel-nav {
-    position: absolute;
-    top: 55%;
-    transform: translateY(-50%);
-    background: var(--secondary-color);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-    cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 10;
-    display: none; /* Los ocultamos por defecto ya que la animación es automática */
+    font-size: 1.2rem;
 }
-.carousel-nav.prev { left: 5%; }
-.carousel-nav.next { right: 5%; }
+
+/* Posicionamiento cerca de las tarjetas, dentro del wrapper principal */
+.carousel-nav.prev {
+    left: 15px;
+}
+
+.carousel-nav.next {
+    right: 15px;
+}
 
 .carousel-nav:hover {
-    background: var(--accent-color);
-    transform: translateY(-50%) scale(1.1);
+    background: var(--accent-color); /* Naranja Andet en hover */
+    transform: translateY(-50%) scale(1.1); /* Efecto de crecimiento */
+}
+
+/* Estilo para cuando un botón no es usable */
+.carousel-nav:disabled {
+    background-color: #bbbbbb;
+    cursor: not-allowed;
+    transform: translateY(-50%); /* Anula el scale */
+    box-shadow: none;
 }

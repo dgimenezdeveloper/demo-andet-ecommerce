@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function getCategoryData() {
         return [
             { name: "Medidor de Energía", img: "imagenes_productos/001_Batería_de_Litio.png" }, // Reutilizando imagen
-            { name: "Medidor de Gas", img: "https://andet.com.pe/wp-content/uploads/2023/12/medidor-de-gas-e1704221159389.png" }, // Ejemplo con URL externa
+            { name: "Inversor", img: "imagenes_productos/002_Inversor_Híbrido.png" }, // Ejemplo con URL externa
             { name: "Caja Porta Medidor", img: "imagenes_productos/003_Inversor_On_Grid.png" }, // Reutilizando imagen
             { name: "Domótica iSmart", img: "imagenes_productos/005_Tira_de_luces_inteligente.png" }, // Reutilizando imagen
             { name: "Inversores", img: "imagenes_productos/002_Inversor_Híbrido.png" },
@@ -37,42 +37,94 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Inicializa el carrusel de categorías, creando y duplicando las tarjetas.
+     * Inicializa el carrusel de categorías con navegación por clic.
      */
     function setupCategoryCarousel() {
-        if (!categoryTrack) return; // Parada de seguridad si el elemento no existe
+        if (!categoryTrack) return;
 
-        const categories = getCategoryData();
-        // Duplicamos las categorías para crear el efecto de bucle infinito
-        const allCategories = [...categories, ...categories]; 
+        const wrapper = document.querySelector('.category-carousel-wrapper');
+        const prevButton = document.getElementById('carousel-prev');
+        const nextButton = document.getElementById('carousel-next');
+        const cardsPerPage = 4;
+        let categories = getCategoryData();
+        
+        // Clonamos las primeras 'cardsPerPage' para el efecto infinito
+        const clonedCards = categories.slice(0, cardsPerPage);
+        let allItems = [...categories, ...clonedCards];
+        
+        let currentIndex = 0;
+        let autoScrollInterval;
+        let isTransitioning = false;
+        
+        const cardWidth = 250;
+        const cardMargin = 30;
+        const moveDistance = cardWidth + cardMargin;
 
-        categoryTrack.innerHTML = ''; // Limpiamos el contenido previo
-
-        allCategories.forEach(cat => {
-            const card = document.createElement('div');
-            card.className = 'category-card';
-            
-            // --- ¡ESTRUCTURA HTML CORREGIDA PARA LA TARJETA! ---
-            card.innerHTML = `
-                <div class="img-container">
-                    <img src="${cat.img}" alt="Categoría ${cat.name}">
-                </div>
+        // 1. Renderiza todas las tarjetas (originales + clones)
+        categoryTrack.innerHTML = allItems.map(cat => `
+            <div class="category-card" style="flex: 0 0 ${cardWidth}px; margin: 0 ${cardMargin / 2}px;">
+                <div class="img-container"><img src="${cat.img}" alt="${cat.name}"></div>
                 <p class="category-name">${cat.name}</p>
-                <div class="cta-footer">
-                    Ver Categoría
-                </div>
-            `;
-            categoryTrack.appendChild(card);
+                <div class="cta-footer">Ver Categoría</div>
+            </div>
+        `).join('');
+
+        // 2. Función principal para mover el carrusel
+        function moveTo(index) {
+            isTransitioning = true;
+            categoryTrack.style.transition = 'transform 0.6s ease-in-out';
+            categoryTrack.style.transform = `translateX(-${index * moveDistance}px)`;
+        }
+
+        // 3. Event listener que detecta cuándo terminó la animación
+        categoryTrack.addEventListener('transitionend', () => {
+            isTransitioning = false;
+            // Magia del bucle infinito: Si hemos llegado al final (a los clones),
+            // saltamos silenciosamente al principio.
+            if (currentIndex >= categories.length) {
+                categoryTrack.style.transition = 'none'; // Sin animación para el salto
+                currentIndex = 0;
+                categoryTrack.style.transform = `translateX(0px)`;
+            }
         });
-        
-        // Esta parte es para ajustar la animación CSS dinámicamente
-        const totalCards = categories.length;
-        const cardWidthWithMargin = 280; // 250px de ancho + 30px de margen
-        const animationWidth = totalCards * cardWidthWithMargin;
-        
-        // Inyectamos la variable en el CSS
-        document.documentElement.style.setProperty('--scroll-width', `-${animationWidth}px`);
-        categoryTrack.style.animationDuration = `${totalCards * 4}s`; // Ajusta la velocidad dinámicamente
+
+        // 4. Lógica para el botón "Siguiente"
+        function handleNext() {
+            if (isTransitioning) return;
+            currentIndex++;
+            moveTo(currentIndex);
+        }
+
+        // 5. Lógica para el botón "Anterior"
+        function handlePrev() {
+            if (isTransitioning || currentIndex <= 0) return;
+            currentIndex--;
+            moveTo(currentIndex);
+        }
+
+        // 6. Lógica del Auto-Scroll
+        function startAutoScroll() {
+            if (autoScrollInterval) clearInterval(autoScrollInterval); // Prevenir múltiples intervalos
+            autoScrollInterval = setInterval(handleNext, 2000); // Se mueve cada 3 segundos
+        }
+
+        // 7. Event Listeners
+        nextButton.addEventListener('click', () => {
+            clearInterval(autoScrollInterval); // Detiene el auto-scroll al interactuar
+            handleNext();
+        });
+
+        prevButton.addEventListener('click', () => {
+            clearInterval(autoScrollInterval); // Detiene el auto-scroll al interactuar
+            handlePrev();
+        });
+
+        // Pausar con el mouse y reanudar
+        wrapper.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+        wrapper.addEventListener('mouseleave', () => startAutoScroll());
+
+        // Iniciar todo
+        startAutoScroll();
     }
 
     // =================================================================
@@ -229,6 +281,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateCartDisplay() {
         if (!cartItemsContainer) return;
+
+        const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+        // Actualiza el texto del contador
+        if (cartCounter) {
+            cartCounter.textContent = cartCount;
+            // Añade o quita la clase 'hidden'
+            if (cartCount > 0) {
+                cartCounter.classList.remove('hidden');
+            } else {
+                cartCounter.classList.add('hidden');
+            }
+        }
+
         cartItemsContainer.innerHTML = '';
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = `<p class="empty-cart">Tu lista de cotización está vacía.</p>`;
@@ -248,9 +314,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 cartItemsContainer.appendChild(cartItemElement);
             });
-        }
-        if (cartCounter) {
-            cartCounter.textContent = cart.reduce((total, item) => total + item.quantity, 0);
         }
     }
 
@@ -308,4 +371,16 @@ function submitContactForm(event) {
     const name = form.querySelector('#name').value;
     alert(`¡Gracias por contactarnos, ${name}! \n\nEn un proyecto real, este formulario enviaría tus datos.\nEsta es una demostración visual.`);
     form.reset();
+}
+
+/**
+ * Simula la acción de búsqueda de productos
+ */
+function executeSearch() {
+    const query = document.getElementById('header-search-input').value;
+    if (query) {
+        alert(`Buscando productos para: "${query}"\n\nEn una aplicación completa, esto mostraría los resultados.`);
+    } else {
+        alert('Por favor, ingrese un término de búsqueda.');
+    }
 }

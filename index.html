@@ -25,28 +25,48 @@
 
 <body>
 
-    <!-- ======================= HEADER ======================= -->
+    <!-- ======================= BARRA SUPERIOR (NUEVO DISEÑO) ======================= -->
+    <div class="header-top-bar">
+        <div class="container header-top-container">
+            <!-- Buscador Simplificado -->
+            <form class="header-search-form" onsubmit="event.preventDefault(); executeSearch();">
+                <input type="text" id="header-search-input" placeholder="Buscar producto...">
+            </form>
+            
+            <!-- Acciones de Usuario (Texto) -->
+            <div class="header-user-actions">
+                <a href="#" class="user-action-link" onclick="alert('Función de Iniciar Sesión en desarrollo.')">Iniciar sesión</a>
+                <a href="#" class="user-action-link" onclick="alert('Función de Favoritos en desarrollo.')">Mis favoritos</a>
+                <a href="#" class="user-action-link" onclick="toggleCart()">Comprar</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================= HEADER PRINCIPAL (LOGO + NAV + CARRITO) ======================= -->
     <header class="header">
-        <div class="container">
-            <a href="#" class="logo-link" data-aos="fade-right">
-                <img src="images/logo-ander.png" alt="Andet Logo" class="logo-img">
-            </a>
-            <nav class="navbar" data-aos="fade-down">
+        <div class="container header-main-container">
+            <div class="header-logo-container">
+                 <a href="#" class="logo-link">
+                    <img src="images/logo-ander.png" alt="Andet Logo" class="logo-img">
+                </a>
+            </div>
+            
+            <nav class="navbar">
                 <a href="#inicio">Inicio</a>
                 <a href="#productos">Productos</a>
                 <a href="#nosotros">Nosotros</a>
                 <a href="#contacto">Contacto</a>
             </nav>
-            <div class="header-icons" data-aos="fade-left">
-                <button class="search-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
+            
+            <div class="header-cart-container">
                 <button class="cart-icon" aria-label="Carrito de Compras" onclick="toggleCart()">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-counter" id="cartCounter">0</span>
+                    <!-- El contador ahora se oculta/muestra con una clase -->
+                    <span class="cart-counter hidden" id="cartCounter">0</span>
                 </button>
             </div>
         </div>
     </header>
-
     <!-- ======================= CARRITO LATERAL (OCULTO) ======================= -->
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
