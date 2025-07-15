@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Muestra los productos en la página actual
-     * @param {Array} products - El array de productos a mostrar
-     * @param {number} page - El número de página a mostrar
+     * @param {Array} products 
+     * @param {number} page 
      */
     function displayProducts(products, page) {
         productGrid.innerHTML = '';
@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
             productCard.setAttribute('data-aos', 'fade-up');
             productCard.onclick = () => openProductModal(product);
 
-            // Usa la URL remota o la local si la remota falla
             const imageUrl = product.imagen;
 
             productCard.innerHTML = `
@@ -69,13 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
             productGrid.appendChild(productCard);
         });
 
-        // Actualiza el estado de los botones de paginación
         updateActivePaginationButton();
     }
 
     /**
      * Configura los botones de paginación
-     * @param {Array} products - El array completo de productos para calcular las páginas
+     * @param {Array} products
      */
     function setupPagination(products) {
         paginationContainer.innerHTML = '';
@@ -94,9 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateActivePaginationButton();
     }
 
-    /**
-     * Resalta el botón de la página actual
-     */
+
     function updateActivePaginationButton() {
         document.querySelectorAll('.pagination-button').forEach(button => {
             button.classList.remove('active');
@@ -108,13 +104,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA DEL MODAL ---
     window.openProductModal = (product) => {
-        document.getElementById('modalImage').src = product.imagen_url || product.imagen;
-        document.getElementById('modalTitle').textContent = product.nombre;
-        document.getElementById('modalCategory').textContent = product.categoria || "Equipos Industriales";
+        const modalImageElement = document.getElementById('modalImage');
+        const modalTitleElement = document.getElementById('modalTitle');
+        const modalCategoryElement = document.getElementById('modalCategory');
+        const imageUrl = product.imagen;
+        modalImageElement.src = imageUrl;
+
+        modalImageElement.alt = product.nombre;
         
-        // Permite añadir al carrito desde el modal
+        modalTitleElement.textContent = product.nombre;
+        modalCategoryElement.textContent = product.categoria || "Equipos Industriales";
+        
         const addToCartBtn = modal.querySelector('.add-to-cart-btn');
-        addToCartBtn.onclick = () => addToCart(product.id);
+        document.getElementById('modalQuantity').value = 1;
+        addToCartBtn.onclick = () => {
+            const quantity = parseInt(document.getElementById('modalQuantity').value);
+            addToCart(product.id, quantity);
+        };
         
         modal.classList.add('active');
         overlay.classList.add('active');
@@ -201,7 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INICIALIZACIÓN ---
     fetchProducts();
-    // Cierra modal/carrito con la tecla Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === "Escape") {
             closeProductModal();
