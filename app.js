@@ -15,9 +15,70 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartCounter = document.getElementById('cartCounter');
     const categoryTrack = document.getElementById('category-carousel-track');
 
+    // =================================================================
+    //                    LÓGICA DEL CARRUSEL DE CATEGORÍAS
+    // =================================================================
     /**
-     * Carga los productos desde el archivo JSON
+     * Define los datos para las tarjetas de categorías.
+     * En un proyecto real, esto podría venir de un JSON separado.
+     * Usamos las imágenes que ya tenemos para la demo.
      */
+    function getCategoryData() {
+        return [
+            { name: "Medidor de Energía", img: "imagenes_productos/001_Batería_de_Litio.png" }, // Reutilizando imagen
+            { name: "Medidor de Gas", img: "https://andet.com.pe/wp-content/uploads/2023/12/medidor-de-gas-e1704221159389.png" }, // Ejemplo con URL externa
+            { name: "Caja Porta Medidor", img: "imagenes_productos/003_Inversor_On_Grid.png" }, // Reutilizando imagen
+            { name: "Domótica iSmart", img: "imagenes_productos/005_Tira_de_luces_inteligente.png" }, // Reutilizando imagen
+            { name: "Inversores", img: "imagenes_productos/002_Inversor_Híbrido.png" },
+            { name: "Baterías", img: "imagenes_productos/001_Batería_de_Litio.png" },
+            { name: "Reflectores", img: "imagenes_productos/007_Reflector_inteligente_sin_marco_30W.png"},
+            { name: "Plafones", img: "imagenes_productos/008_PLAFON_REDONDO_INTELIGENTE_RGB.jpg"},
+        ];
+    }
+
+    /**
+     * Inicializa el carrusel de categorías, creando y duplicando las tarjetas.
+     */
+    function setupCategoryCarousel() {
+        if (!categoryTrack) return; // Parada de seguridad si el elemento no existe
+
+        const categories = getCategoryData();
+        // Duplicamos las categorías para crear el efecto de bucle infinito
+        const allCategories = [...categories, ...categories]; 
+
+        categoryTrack.innerHTML = ''; // Limpiamos el contenido previo
+
+        allCategories.forEach(cat => {
+            const card = document.createElement('div');
+            card.className = 'category-card';
+            
+            // --- ¡ESTRUCTURA HTML CORREGIDA PARA LA TARJETA! ---
+            card.innerHTML = `
+                <div class="img-container">
+                    <img src="${cat.img}" alt="Categoría ${cat.name}">
+                </div>
+                <p class="category-name">${cat.name}</p>
+                <div class="cta-footer">
+                    Ver Categoría
+                </div>
+            `;
+            categoryTrack.appendChild(card);
+        });
+        
+        // Esta parte es para ajustar la animación CSS dinámicamente
+        const totalCards = categories.length;
+        const cardWidthWithMargin = 280; // 250px de ancho + 30px de margen
+        const animationWidth = totalCards * cardWidthWithMargin;
+        
+        // Inyectamos la variable en el CSS
+        document.documentElement.style.setProperty('--scroll-width', `-${animationWidth}px`);
+        categoryTrack.style.animationDuration = `${totalCards * 4}s`; // Ajusta la velocidad dinámicamente
+    }
+
+    // =================================================================
+    //                    LÓGICA PRINCIPAL DE PRODUCTOS
+    // =================================================================
+
     async function fetchProducts() {
         try {
             const response = await fetch('products.json');
@@ -27,16 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
             setupPagination(allProducts);
         } catch (error) {
             console.error("No se pudieron cargar los productos:", error);
-            productGrid.innerHTML = `<p style="text-align:center; color: var(--secondary-color);">Error al cargar productos. Por favor, intente de nuevo más tarde.</p>`;
+            productGrid.innerHTML = `<p style="text-align:center; color: var(--secondary-color);">Error al cargar productos.</p>`;
         }
     }
 
-    /**
-     * Muestra los productos en la página actual
-     * @param {Array} products 
-     * @param {number} page 
-     */
     function displayProducts(products, page) {
+        if (!productGrid) return;
         productGrid.innerHTML = '';
         currentPage = page;
 
@@ -44,19 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const end = start + productsPerPage;
         const paginatedProducts = products.slice(start, end);
 
-        if (paginatedProducts.length === 0 && page === 1) {
-             productGrid.innerHTML = `<p style="text-align:center;">No se encontraron productos.</p>`;
-             return;
-        }
-
         paginatedProducts.forEach(product => {
             const productCard = document.createElement('div');
             productCard.className = 'product-card';
             productCard.setAttribute('data-aos', 'fade-up');
             productCard.onclick = () => openProductModal(product);
-
             const imageUrl = product.imagen;
-
             productCard.innerHTML = `
                 <div class="product-image-container">
                     <img src="${imageUrl}" alt="${product.nombre}" class="product-image" loading="lazy">
@@ -71,12 +121,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         updateActivePaginationButton();
     }
+    
+    // ... (El resto de tus funciones: setupPagination, openProductModal, toggleCart, etc., permanecen igual) ...
+    // Asegúrate de que todas las demás funciones que ya tenías estén aquí.
+    
+    // ...
 
-    /**
-     * Configura los botones de paginación
-     * @param {Array} products
-     */
+    // --- INICIALIZACIÓN DE LA PÁGINA ---
+    fetchProducts();
+    setupCategoryCarousel(); // Ahora se llamará correctamente
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") {
+            closeProductModal();
+            if (cartSidebar.classList.contains('active')) {
+                toggleCart();
+            }
+        }
+    });
+
+    // ... Y aquí adentro van el resto de funciones (openProductModal, addToCart, etc) ...
+
     function setupPagination(products) {
+        if (!paginationContainer) return;
         paginationContainer.innerHTML = '';
         const pageCount = Math.ceil(products.length / productsPerPage);
 
@@ -93,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateActivePaginationButton();
     }
 
-
     function updateActivePaginationButton() {
         document.querySelectorAll('.pagination-button').forEach(button => {
             button.classList.remove('active');
@@ -103,85 +169,66 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- LÓGICA DEL MODAL ---
     window.openProductModal = (product) => {
-        // Obtenemos los elementos del DOM que necesitamos
+        if (!modal) return;
         const modalMainImage = document.getElementById('modalMainImage');
         const modalThumbnailsContainer = document.getElementById('modalThumbnails');
         const modalTitle = document.getElementById('modalTitle');
         const modalCategory = document.getElementById('modalCategory');
         const addToCartBtn = modal.querySelector('.add-to-cart-btn');
 
-        // Actualizamos título y categoría
         modalTitle.textContent = product.nombre;
         modalCategory.textContent = product.categoria || "Equipos Industriales";
-
-        // --- LÓGICA DE LA GALERÍA ---
-        // Limpiamos miniaturas anteriores
+        
         modalThumbnailsContainer.innerHTML = '';
-        
-        // El producto puede tener un array de imágenes o solo una.
-        // Si no existe un array de imágenes, creamos uno de demostración repitiendo la imagen principal 4 veces.
         const imageList = product.gallery_images || [product.imagen, product.imagen, product.imagen, product.imagen];
-        
-        // Ponemos la primera imagen como la principal al abrir
         modalMainImage.src = imageList[0];
         
-        // Creamos una miniatura por cada imagen en la lista
         imageList.forEach((imgSrc, index) => {
             const thumb = document.createElement('img');
             thumb.src = imgSrc;
             thumb.alt = `Vista ${index + 1} de ${product.nombre}`;
             thumb.className = 'modal-thumbnail-img';
-            
-            // La primera miniatura empieza como activa
-            if (index === 0) {
-                thumb.classList.add('active');
-            }
-            
-            // Evento de clic para cada miniatura
-            thumb.onclick = () => {
-                // Efecto de fade out para la imagen principal
+            if (index === 0) thumb.classList.add('active');
+            thumb.onclick = (e) => {
+                e.stopPropagation(); // Evita que se cierre el modal al hacer clic en la miniatura
                 modalMainImage.style.opacity = '0';
-
                 setTimeout(() => {
-                    // Cambiamos la imagen principal y la hacemos visible de nuevo
                     modalMainImage.src = imgSrc;
                     modalMainImage.style.opacity = '1';
-                }, 150); // El tiempo debe ser menor a la transición en CSS
-
-                // Actualizamos la clase 'active' en las miniaturas
+                }, 150);
                 modalThumbnailsContainer.querySelector('.active').classList.remove('active');
                 thumb.classList.add('active');
             };
-            
             modalThumbnailsContainer.appendChild(thumb);
         });
 
-        // Lógica para añadir al carrito (se mantiene igual, pero más limpia)
-        document.getElementById('modalQuantity').value = 1; // Reiniciar cantidad
+        document.getElementById('modalQuantity').value = 1;
         addToCartBtn.onclick = () => {
             const quantity = parseInt(document.getElementById('modalQuantity').value);
             addToCart(product.id, quantity);
         };
         
-        // Mostramos el modal
         modal.classList.add('active');
         overlay.classList.add('active');
     };
-    
+
     window.closeProductModal = () => {
-        modal.classList.remove('active');
-        overlay.classList.remove('active');
+        if (modal && overlay) {
+            modal.classList.remove('active');
+            overlay.classList.remove('active');
+        }
     };
 
-    // --- LÓGICA DEL CARRITO ---
     window.toggleCart = () => {
-        cartSidebar.classList.toggle('active');
-        overlay.classList.toggle('active');
+        if (cartSidebar && overlay) {
+            cartSidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
     };
 
     function updateCartDisplay() {
+        if (!cartItemsContainer) return;
         cartItemsContainer.innerHTML = '';
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = `<p class="empty-cart">Tu lista de cotización está vacía.</p>`;
@@ -190,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cartItemElement = document.createElement('div');
                 cartItemElement.className = 'cart-item';
                 cartItemElement.innerHTML = `
-                    <img src="${item.imagen_url || item.imagen}" alt="${item.nombre}" class="cart-item-image">
+                    <img src="${item.imagen}" alt="${item.nombre}" class="cart-item-image">
                     <div class="cart-item-info">
                         <h4>${item.nombre}</h4>
                         <p class="cart-item-quantity">Cantidad: ${item.quantity}</p>
@@ -202,11 +249,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 cartItemsContainer.appendChild(cartItemElement);
             });
         }
-        cartCounter.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        if (cartCounter) {
+            cartCounter.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        }
     }
-    
+
     window.addToCart = (productId, quantity = 1) => {
         const product = allProducts.find(p => p.id === productId);
+        if (!product) return;
         const existingItem = cart.find(item => item.id === productId);
 
         if (existingItem) {
@@ -218,91 +268,44 @@ document.addEventListener('DOMContentLoaded', () => {
         closeProductModal();
         updateCartDisplay();
         
-        // Muestra el carrito por un momento para feedback
-        if (!cartSidebar.classList.contains('active')) {
+        if (cartSidebar && !cartSidebar.classList.contains('active')) {
             toggleCart();
             setTimeout(toggleCart, 1500);
         }
     };
-    
+
     window.addToCartFromModal = () => {
-        const productId = allProducts.find(p => p.nombre === document.getElementById('modalTitle').textContent).id;
-        const quantity = parseInt(document.getElementById('modalQuantity').value);
-        addToCart(productId, quantity);
+        const title = document.getElementById('modalTitle').textContent;
+        const product = allProducts.find(p => p.nombre === title);
+        if(product){
+            const quantity = parseInt(document.getElementById('modalQuantity').value);
+            addToCart(product.id, quantity);
+        }
     };
 
     window.removeFromCart = (productId) => {
         cart = cart.filter(item => item.id !== productId);
         updateCartDisplay();
     };
-    
+
     window.increaseQuantity = () => {
         const input = document.getElementById('modalQuantity');
         input.value = parseInt(input.value) + 1;
     };
-    
+
     window.decreaseQuantity = () => {
         const input = document.getElementById('modalQuantity');
         if (parseInt(input.value) > 1) {
             input.value = parseInt(input.value) - 1;
         }
     };
-
-
-    // --- INICIALIZACIÓN ---
-    fetchProducts();
-    setupCategoryCarousel();
-    document.addEventListener('keydown', (e) => {
-        if (e.key === "Escape") {
-            closeProductModal();
-            if(cartSidebar.classList.contains('active')) {
-                toggleCart();
-            }
-        }
-    });
 });
 
-function getCategoryData() {
-        return [
-            { name: "Medidor de Energía", img: "https://andet.com.pe/wp-content/uploads/2023/12/monofasico.png"},
-            { name: "Medidor de Gas", img: "https://andet.com.pe/wp-content/uploads/2023/12/medidor-de-gas-e1704221159389.png"},
-            { name: "Caja Porta Medidor", img: "https://andet.com.pe/wp-content/uploads/2023/12/caja-de-medidor.png"},
-            { name: "Domótica iSmart", img: "https://andet.com.pe/wp-content/uploads/2023/12/camara-de-seguridad.png"},
-            { name: "Inversor Híbrido", img: "imagenes_productos/002_Inversor_Híbrido.png"}, // Reutilizamos imágenes
-            { name: "Batería de Litio", img: "imagenes_productos/001_Batería_de_Litio.png"},
-            { name: "Inversor On Grid", img: "imagenes_productos/003_Inversor_On_Grid.png"},
-            { name: "Luces Inteligentes", img: "imagenes_productos/005_Tira_de_luces_inteligente.png"},
-        ];
-    }
-function setupCategoryCarousel() {
-        if (!categoryTrack) return; // Si no existe el elemento, no hace nada
 
-        const categories = getCategoryData();
-        const allCategories = [...categories, ...categories]; // ¡Duplicamos para el efecto infinito!
-        
-        categoryTrack.innerHTML = ''; // Limpiamos el contenedor
-        
-        allCategories.forEach(cat => {
-            const card = document.createElement('div');
-            card.className = 'category-card';
-            card.innerHTML = `
-                <div class="img-container">
-                    <img src="${cat.img}" alt="${cat.name}">
-                </div>
-                <p class="category-name">${cat.name}</p>
-                <div class="cta-footer">
-                    Ver Categoría
-                </div>
-            `;
-            categoryTrack.appendChild(card);
-        });
-
-        // Actualizamos la animación en CSS para que coincida con el número real de tarjetas
-        const totalCards = categories.length; // Usamos el largo original para el cálculo
-        const cardWidth = 250; // Ancho definido en CSS
-        const margin = 30; // 15px a cada lado
-        const totalWidth = totalCards * (cardWidth + margin);
-
-        document.documentElement.style.setProperty('--scroll-width', `-${totalWidth}px`);
-        categoryTrack.style.animationDuration = `${totalCards * 3}s`; // Ajusta la velocidad dinámicamente
-    }
+function submitContactForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.querySelector('#name').value;
+    alert(`¡Gracias por contactarnos, ${name}! \n\nEn un proyecto real, este formulario enviaría tus datos.\nEsta es una demostración visual.`);
+    form.reset();
+}

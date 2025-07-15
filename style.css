@@ -668,8 +668,8 @@ footer {
         transform: translateX(0);
     }
     100% {
-        /* Se moverá la mitad de su longitud total (ya que clonaremos los items) */
-        transform: translateX(calc(-250px * 8)); /* 250px por tarjeta, 8 tarjetas */
+        /* Usamos la variable que calculamos en JS, con un valor por defecto */
+        transform: translateX(var(--scroll-width, -2240px));
     }
 }
 
