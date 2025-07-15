@@ -1,10 +1,32 @@
+# Entornos virtuales y dependencias
 env/
-*.pyc
 __pycache__/
-andet_catalogo_Completo/
+*.pyc
+
+# Configuración de VSCode
 .vscode/
 .vscode-test/
+
+# Variables de entorno
 .env
 .env.local
 .env.development.local
 .env.test.local
+
+# Archivos de datos y catálogos grandes
+data_completa.txt
+products.json
+andet_catalogo_completo/
+data_completo.txt
+estilos_completos.json
+
+# Imágenes y archivos binarios
+imagenes_productos/
+images/
+
+# Archivos temporales y de depuración
+debug_andet.html
+limpiar_proyecto.sh
+import requests.py
+script_generar_products.py
+script_multipagina.py
