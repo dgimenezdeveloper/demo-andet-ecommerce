@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="product-info">
                     <h3 class="product-name">${product.nombre}</h3>
-                    <button class="details-button">Ver Detalles</button>
+                    <button class="details-button">Cotizar Ahora</button>
                 </div>
             `;
             productGrid.appendChild(productCard);
