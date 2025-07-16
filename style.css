@@ -416,9 +416,19 @@ img { max-width: 100%; height: auto; }
 .category-carousel-section {
     position: relative;
     padding: 60px 0;
-    background-image: url('https://andet.com.pe/wp-content/uploads/2023/12/textura-3.jpg');
+
+    /* La magia está aquí: usamos capas de fondo */
+    background-image: 
+        /* 1. Capa de color blanco semi-transparente (el overlay) */
+        linear-gradient(rgba(255, 255, 255, 0.92), rgba(211, 155, 155, 0.92)),
+        
+        /* 2. Tu imagen de fondo (separada por coma) */
+        url('images/banner-catalogo.jpg');
+
+    /* Propiedades para la imagen de fondo */
     background-size: cover;
     background-position: center;
+    
 }
 
 .category-title-container {
@@ -1076,4 +1086,88 @@ footer {
     background-color: var(--accent-color);
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* --- Estilos para la Sección de Propuesta de Valor --- */
+.value-prop-section {
+    padding: 80px 0;
+    background-color: var(--bg-light); /* Un fondo gris claro para separarla */
+}
+
+.value-prop-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* Para que sea responsive en pantallas pequeñas */
+}
+
+/* Columna de Texto */
+.value-prop-text {
+    flex: 1;
+    min-width: 300px; /* Ancho mínimo para la columna de texto */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2; /* Para que el texto esté sobre la imagen */
+}
+
+.logo-container-vp {
+    margin-bottom: 20px;
+}
+
+.logo-container-vp img {
+    max-width: 255px; /* Ajusta el tamaño del logo según necesites */
+    height: auto;
+}
+
+.text-card-vp {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 436px; /* Ancho máximo para la tarjeta de texto */
+    text-align: center;
+    position: relative;
+}
+
+.text-card-vp p {
+    font-size: 1 em;
+    line-height: 1.6;
+    color: var(--text-color-dark);
+    font-weight: 100;
+}
+
+/* Columna de Imagen */
+.value-prop-image {
+    flex: 1.2; /* Damos un poco más de espacio a la imagen */
+    min-width: 320px; /* Ancho mínimo para la imagen */
+    margin-left: -50px; /* ¡El truco para la superposición! */
+}
+
+.value-prop-image {
+    flex: 1.2;
+    min-width: 320px;
+    /* Aumentamos el margen negativo para que se "meta" más hacia la izquierda */
+    margin-left: -120px; 
+}
+
+/* --- Ajustes para Responsive --- */
+@media (max-width: 992px) {
+    .value-prop-image {
+        margin-left: 0; /* Quitamos la superposición en tablets */
+    }
+    .value-prop-container {
+        flex-direction: column; /* Apilamos las columnas */
+    }
+}
+@media (max-width: 576px) {
+    .text-card-vp p {
+        font-size: 1.1rem; /* Hacemos el texto un poco más pequeño en móviles */
+    }
+    .value-prop-section {
+        padding: 60px 0; /* Reducimos el espaciado en móviles */
+    }
 }
