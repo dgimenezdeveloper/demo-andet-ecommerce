@@ -435,19 +435,61 @@ function submitContactForm(event) {
     form.reset();
 }
 
-/**
- * Simula la acción de búsqueda de productos
- */
-function executeSearch() {
-    const query = document.getElementById("header-search-input").value;
-    if (query) {
-        alert(
-            `Buscando productos para: "${query}"\n\nEn una aplicación completa, esto mostraría los resultados.`
-        );
-    } else {
-        alert("Por favor, ingrese un término de búsqueda.");
+    // --- LÓGICA DE BÚSQUEDA EN TIEMPO REAL ---
+    const searchInput = document.getElementById('header-search-input');
+    const searchResultsContainer = document.getElementById('search-results-container');
+
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase().trim();
+
+        if (query.length < 2) {
+            searchResultsContainer.classList.remove('active');
+            return;
+        }
+
+        const filteredProducts = allProducts.filter(product => {
+            return product.nombre.toLowerCase().includes(query) || 
+                   (product.categoria && product.categoria.toLowerCase().includes(query));
+        });
+
+        displaySearchResults(filteredProducts);
+    });
+
+    // Ocultar resultados si se hace clic fuera
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-container')) {
+            searchResultsContainer.classList.remove('active');
+        }
+    });
+
+
+    function displaySearchResults(results) {
+        searchResultsContainer.innerHTML = '';
+
+        if (results.length === 0) {
+            searchResultsContainer.innerHTML = `<p class="no-results">No se encontraron productos.</p>`;
+        } else {
+            results.slice(0, 10).forEach(product => { // Mostramos máximo 10 resultados
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+                resultItem.innerHTML = `
+                    <img src="${product.imagen}" alt="${product.nombre}">
+                    <div class="result-item-info">
+                        <h4>${product.nombre}</h4>
+                        <p>${product.categoria || ''}</p>
+                    </div>
+                `;
+                resultItem.addEventListener('click', () => {
+                    openProductModal(product);
+                    searchInput.value = ''; // Limpiar el buscador
+                    searchResultsContainer.classList.remove('active'); // Ocultar resultados
+                });
+                searchResultsContainer.appendChild(resultItem);
+            });
+        }
+        
+        searchResultsContainer.classList.add('active');
     }
-}
 
 // --- Lógica para el Hero Slider ---
 document.addEventListener("DOMContentLoaded", () => {

@@ -31,10 +31,17 @@
         <!-- ======================= BARRA SUPERIOR (NUEVO DISEÑO) ======================= -->
         <div class="header-top-bar">
             <div class="container header-top-container">
-                <!-- Buscador Simplificado -->
-                <form class="header-search-form" onsubmit="event.preventDefault(); executeSearch();">
-                    <input type="text" id="header-search-input" placeholder="Buscar producto...">
-                </form>
+
+                <!-- Contenedor del Buscador (para posicionar los resultados) -->
+                <div class="search-container">
+                    <form class="header-search-form" onsubmit="event.preventDefault();">
+                        <input type="text" id="header-search-input" placeholder="Buscar producto..." autocomplete="off">
+                    </form>
+                    <!-- Aquí se mostrarán los resultados de la búsqueda -->
+                    <div id="search-results-container" class="search-results"></div>
+                </div>
+
+
 
                 <!-- Acciones de Usuario (Texto) -->
                 <div class="header-user-actions">
