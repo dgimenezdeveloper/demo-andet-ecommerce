@@ -28,58 +28,56 @@
     <!-- Contenedor principal para hacer todo el header fijo y animado -->
     <div id="sticky-header-wrapper" data-aos="fade-down" data-aos-duration="1000">
 
-        <!-- ======================= BARRA SUPERIOR (NUEVO DISEÑO) ======================= -->
-        <div class="header-top-bar">
-            <div class="container header-top-container">
+    <!-- ======================= BARRA SUPERIOR (NUEVO DISEÑO) ======================= -->
+    <div class="header-top-bar">
+        <div class="container header-top-container" style="display: flex; align-items: center; justify-content: space-between;">
 
-                <!-- Contenedor del Buscador (para posicionar los resultados) -->
-                <div class="search-container">
-                    <form class="header-search-form" onsubmit="event.preventDefault();">
-                        <input type="text" id="header-search-input" placeholder="Buscar producto..." autocomplete="off">
-                    </form>
-                    <!-- Aquí se mostrarán los resultados de la búsqueda -->
-                    <div id="search-results-container" class="search-results"></div>
-                </div>
+            <!-- Logo al lado del buscador -->
+            <div class="header-logo-container" style="margin-right: 30px;">
+                <a href="#" class="logo-link">
+                    <img src="images/logo-ander.png" alt="Andet Logo" class="logo-img">
+                </a>
+            </div>
 
+            <!-- Contenedor del Buscador (para posicionar los resultados) -->
+            <div class="search-container" style="flex: 1;">
+                <form class="header-search-form" onsubmit="event.preventDefault();">
+                    <input type="text" id="header-search-input" placeholder="Buscar producto..." autocomplete="off">
+                </form>
+                <!-- Aquí se mostrarán los resultados de la búsqueda -->
+                <div id="search-results-container" class="search-results"></div>
+            </div>
 
-
-                <!-- Acciones de Usuario (Texto) -->
-                <div class="header-user-actions">
-                    <a href="#" class="user-action" onclick="alert('Función de Iniciar Sesión en desarrollo.')">
-                        <i class="far fa-user"></i>
-                        <span>Iniciar sesión</span>
-                    </a>
-                    <a href="#" class="user-action" onclick="alert('Función de Favoritos en desarrollo.')">
-                        <i class="far fa-heart"></i>
-                        <span>Mis favoritos</span>
-                    </a>
-                    <a href="#" class="user-action" onclick="toggleCart()">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>Comprar</span>
-                    </a>
-                </div>
+            <!-- Acciones de Usuario (Texto) -->
+            <div class="header-user-actions" style="margin-left: 30px;">
+                <a href="#" class="user-action" onclick="alert('Función de Iniciar Sesión en desarrollo.')">
+                    <i class="far fa-user"></i>
+                    <span>Iniciar sesión</span>
+                </a>
+                <a href="#" class="user-action" onclick="alert('Función de Favoritos en desarrollo.')">
+                    <i class="far fa-heart"></i>
+                    <span>Mis favoritos</span>
+                </a>
+                <a href="#" class="user-action" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Comprar</span>
+                </a>
             </div>
         </div>
+    </div>
 
-        <!-- ======================= HEADER PRINCIPAL (LOGO + NAV + CARRITO) ======================= -->
-        <header class="header">
-            <div class="container header-main-container">
-                <div class="header-logo-container">
-                    <a href="#" class="logo-link">
-                        <img src="images/logo-ander.png" alt="Andet Logo" class="logo-img">
-                    </a>
-                </div>
-
-                <nav class="navbar">
-                    <a href="#inicio">Inicio</a>
-                    <a href="#productos">Productos</a>
-                    <a href="#nosotros">Nosotros</a>
-                    <a href="#contacto">Contacto</a>
-                </nav>
-            </div>
-        </header>
-
-    </div> <!-- Fin del sticky-header-wrapper -->
+    <!-- ======================= HEADER PRINCIPAL (LOGO + NAV + CARRITO) ======================= -->
+    <header class="header">
+        <div class="container header-main-container" style="display: flex; justify-content: center;">
+            <nav class="navbar" style="display: flex; gap: 40px;">
+                <a href="#inicio">Inicio</a>
+                <a href="#productos">Productos</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
+    </header>
+</div> <!-- Fin del sticky-header-wrapper -->
     <!-- ======================= CARRITO LATERAL (OCULTO) ======================= -->
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
