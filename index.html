@@ -20,7 +20,7 @@
         rel="stylesheet">
 
     <!-- Iconos de Font Awesome -->
-    <script src="https://kit.fontawesome.com/7a6d8cb75c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -32,12 +32,21 @@
             <form class="header-search-form" onsubmit="event.preventDefault(); executeSearch();">
                 <input type="text" id="header-search-input" placeholder="Buscar producto...">
             </form>
-            
+
             <!-- Acciones de Usuario (Texto) -->
             <div class="header-user-actions">
-                <a href="#" class="user-action-link" onclick="alert('Función de Iniciar Sesión en desarrollo.')">Iniciar sesión</a>
-                <a href="#" class="user-action-link" onclick="alert('Función de Favoritos en desarrollo.')">Mis favoritos</a>
-                <a href="#" class="user-action-link" onclick="toggleCart()">Comprar</a>
+                <a href="#" class="user-action" onclick="alert('Función de Iniciar Sesión en desarrollo.')">
+                    <i class="far fa-user"></i>
+                    <span>Iniciar sesión</span>
+                </a>
+                <a href="#" class="user-action" onclick="alert('Función de Favoritos en desarrollo.')">
+                    <i class="far fa-heart"></i>
+                    <span>Mis favoritos</span>
+                </a>
+                <a href="#" class="user-action" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Comprar</span>
+                </a>
             </div>
         </div>
     </div>
@@ -46,25 +55,19 @@
     <header class="header">
         <div class="container header-main-container">
             <div class="header-logo-container">
-                 <a href="#" class="logo-link">
+                <a href="#" class="logo-link">
                     <img src="images/logo-ander.png" alt="Andet Logo" class="logo-img">
                 </a>
             </div>
-            
+
             <nav class="navbar">
                 <a href="#inicio">Inicio</a>
                 <a href="#productos">Productos</a>
                 <a href="#nosotros">Nosotros</a>
                 <a href="#contacto">Contacto</a>
             </nav>
+
             
-            <div class="header-cart-container">
-                <button class="cart-icon" aria-label="Carrito de Compras" onclick="toggleCart()">
-                    <i class="fas fa-shopping-cart"></i>
-                    <!-- El contador ahora se oculta/muestra con una clase -->
-                    <span class="cart-counter hidden" id="cartCounter">0</span>
-                </button>
-            </div>
         </div>
     </header>
     <!-- ======================= CARRITO LATERAL (OCULTO) ======================= -->
@@ -91,8 +94,8 @@
                 <a href="#productos" class="cta-button">Descubre nuestros equipos</a>
             </div>
         </section>
-              
-<!-- ======================= SECCIÓN DE CATEGORÍAS (CARRUSEL) ======================= -->
+
+        <!-- ======================= SECCIÓN DE CATEGORÍAS (CARRUSEL) ======================= -->
         <section class="category-carousel-section">
             <div class="category-title-container" data-aos="fade-up">
                 <h3 class="category-title-chip">Categorías</h3>
@@ -112,7 +115,7 @@
             </button>
         </section>
 
-    
+
         <!-- ======================= SECCIÓN DE PRODUCTOS ======================= -->
         <section id="productos" class="product-grid">
             <div class="container">
@@ -188,7 +191,8 @@
     <footer>
         <div class="container footer-grid">
             <div class="footer-column logo-column">
-                <img src="https://andet.com.pe/wp-content/uploads/2020/09/logo-ander.png" alt="Andet Logo" class="footer-logo-img">
+                <img src="https://andet.com.pe/wp-content/uploads/2020/09/logo-ander.png" alt="Andet Logo"
+                    class="footer-logo-img">
             </div>
 
             <div class="footer-column">
