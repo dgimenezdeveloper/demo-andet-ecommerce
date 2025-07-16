@@ -384,3 +384,57 @@ function executeSearch() {
         alert('Por favor, ingrese un término de búsqueda.');
     }
 }
+
+// --- Lógica para el Hero Slider ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Asegúrate de que este código no se ejecute si no existe el slider
+    const heroSlider = document.querySelector('.hero-slider');
+    if (!heroSlider) return;
+
+    const slides = heroSlider.querySelectorAll('.slide');
+    const nextBtn = heroSlider.querySelector('.next-slide');
+    const prevBtn = heroSlider.querySelector('.prev-slide');
+    let currentSlide = 0;
+    let slideInterval;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function startSlideShow() {
+        stopSlideShow(); // Limpia cualquier intervalo anterior
+        slideInterval = setInterval(nextSlide, 7000); // Cambia cada 7 segundos
+    }
+
+    function stopSlideShow() {
+        clearInterval(slideInterval);
+    }
+
+    if (slides.length > 1) {
+        showSlide(currentSlide);
+        startSlideShow();
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            stopSlideShow(); // Detenemos el autoplay al interactuar
+            startSlideShow(); // Y lo reiniciamos
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+            stopSlideShow();
+            startSlideShow();
+        });
+    }
+});
