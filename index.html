@@ -25,51 +25,54 @@
 
 <body>
 
-    <!-- ======================= BARRA SUPERIOR (NUEVO DISEÑO) ======================= -->
-    <div class="header-top-bar">
-        <div class="container header-top-container">
-            <!-- Buscador Simplificado -->
-            <form class="header-search-form" onsubmit="event.preventDefault(); executeSearch();">
-                <input type="text" id="header-search-input" placeholder="Buscar producto...">
-            </form>
+    <!-- Contenedor principal para hacer todo el header fijo y animado -->
+    <div id="sticky-header-wrapper" data-aos="fade-down" data-aos-duration="1000">
 
-            <!-- Acciones de Usuario (Texto) -->
-            <div class="header-user-actions">
-                <a href="#" class="user-action" onclick="alert('Función de Iniciar Sesión en desarrollo.')">
-                    <i class="far fa-user"></i>
-                    <span>Iniciar sesión</span>
-                </a>
-                <a href="#" class="user-action" onclick="alert('Función de Favoritos en desarrollo.')">
-                    <i class="far fa-heart"></i>
-                    <span>Mis favoritos</span>
-                </a>
-                <a href="#" class="user-action" onclick="toggleCart()">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>Comprar</span>
-                </a>
+        <!-- ======================= BARRA SUPERIOR (NUEVO DISEÑO) ======================= -->
+        <div class="header-top-bar">
+            <div class="container header-top-container">
+                <!-- Buscador Simplificado -->
+                <form class="header-search-form" onsubmit="event.preventDefault(); executeSearch();">
+                    <input type="text" id="header-search-input" placeholder="Buscar producto...">
+                </form>
+
+                <!-- Acciones de Usuario (Texto) -->
+                <div class="header-user-actions">
+                    <a href="#" class="user-action" onclick="alert('Función de Iniciar Sesión en desarrollo.')">
+                        <i class="far fa-user"></i>
+                        <span>Iniciar sesión</span>
+                    </a>
+                    <a href="#" class="user-action" onclick="alert('Función de Favoritos en desarrollo.')">
+                        <i class="far fa-heart"></i>
+                        <span>Mis favoritos</span>
+                    </a>
+                    <a href="#" class="user-action" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Comprar</span>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- ======================= HEADER PRINCIPAL (LOGO + NAV + CARRITO) ======================= -->
-    <header class="header">
-        <div class="container header-main-container">
-            <div class="header-logo-container">
-                <a href="#" class="logo-link">
-                    <img src="images/logo-ander.png" alt="Andet Logo" class="logo-img">
-                </a>
+        <!-- ======================= HEADER PRINCIPAL (LOGO + NAV + CARRITO) ======================= -->
+        <header class="header">
+            <div class="container header-main-container">
+                <div class="header-logo-container">
+                    <a href="#" class="logo-link">
+                        <img src="images/logo-ander.png" alt="Andet Logo" class="logo-img">
+                    </a>
+                </div>
+
+                <nav class="navbar">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#productos">Productos</a>
+                    <a href="#nosotros">Nosotros</a>
+                    <a href="#contacto">Contacto</a>
+                </nav>
             </div>
+        </header>
 
-            <nav class="navbar">
-                <a href="#inicio">Inicio</a>
-                <a href="#productos">Productos</a>
-                <a href="#nosotros">Nosotros</a>
-                <a href="#contacto">Contacto</a>
-            </nav>
-
-            
-        </div>
-    </header>
+    </div> <!-- Fin del sticky-header-wrapper -->
     <!-- ======================= CARRITO LATERAL (OCULTO) ======================= -->
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
@@ -84,44 +87,44 @@
         </div>
     </div>
     <div class="overlay" id="overlay" onclick="toggleCart()"></div>
-      
-<!-- ======================= HERO SLIDER (ESTILO SIGELEC) ======================= -->
-<section class="hero-slider">
-    <!-- Diapositiva 1 -->
-    <div class="slide active" style="background-image: url('images/Equipos-electricos.jpeg');">
-        <div class="hero-content-slider" data-aos="fade-right">
-            <h1>Equipos Eléctricos de Alta Calidad</h1>
-            <p>Marcas líderes en la industria para garantizar la eficiencia de tus proyectos.</p>
-            <a href="#productos" class="cta-button">Ver catálogo</a>
-        </div>
-    </div>
 
-    <!-- Diapositiva 2 -->
-    <div class="slide" style="background-image: url('images/automatizacion.webp');">
-        <div class="hero-content-slider" data-aos="fade-right">
-            <h1>Automatización y Control Industrial</h1>
-            <p>Soluciones inteligentes para optimizar tus procesos y aumentar la productividad.</p>
-            <a href="#nosotros" class="cta-button">Saber más</a>
+    <!-- ======================= HERO SLIDER (ESTILO SIGELEC) ======================= -->
+    <section class="hero-slider">
+        <!-- Diapositiva 1 -->
+        <div class="slide active" style="background-image: url('images/Equipos-electricos.jpeg');">
+            <div class="hero-content-slider" data-aos="fade-right">
+                <h1>Equipos Eléctricos de Alta Calidad</h1>
+                <p>Marcas líderes en la industria para garantizar la eficiencia de tus proyectos.</p>
+                <a href="#productos" class="cta-button">Ver catálogo</a>
+            </div>
         </div>
-    </div>
 
-    <!-- Diapositiva 3 -->
-    <div class="slide" style="background-image: url('images/soluciones-inmediatas.jpg');">
-        <div class="hero-content-slider" data-aos="fade-right">
+        <!-- Diapositiva 2 -->
+        <div class="slide" style="background-image: url('images/automatizacion.webp');">
+            <div class="hero-content-slider" data-aos="fade-right">
+                <h1>Automatización y Control Industrial</h1>
+                <p>Soluciones inteligentes para optimizar tus procesos y aumentar la productividad.</p>
+                <a href="#nosotros" class="cta-button">Saber más</a>
+            </div>
+        </div>
+
+        <!-- Diapositiva 3 -->
+        <div class="slide" style="background-image: url('images/soluciones-inmediatas.jpg');">
+            <div class="hero-content-slider" data-aos="fade-right">
                 <h1>Soluciones Inmediatas<br>para la Industria<br>Eléctrica</h1>
                 <p>Expertos en el suministro de equipos de medición y componentes eléctricos.</p>
                 <a href="#productos" class="cta-button">Descubre nuestros equipos</a>
             </div>
-    </div>
+        </div>
 
-    <!-- Controles de navegación -->
-    <div class="slider-nav">
-        <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
-        <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
-    </div>
-</section>
+        <!-- Controles de navegación -->
+        <div class="slider-nav">
+            <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
+            <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
 
-    
+
     <main>
         <!-- ======================= HERO SECTION ======================= -->
         <!-- <section id="inicio" class="hero">
@@ -131,38 +134,38 @@
                 <a href="#productos" class="cta-button">Descubre nuestros equipos</a>
             </div>
         </section> -->
-      
-<!-- ======================= SECCIÓN DE MARCAS DESTACADAS ======================= -->
-<section class="brands-section" data-aos="fade-up">
-    <div class="container">
-        <!-- Usamos tu color rojo de marca para el título -->
-        <h2 class="section-title" style="color: var(--secondary-color);">Marcas Destacadas</h2>
-        <div class="brands-container">
-            <div class="brands-slide">
-                <!-- Rutas corregidas para que coincidan con tus archivos en la carpeta /images -->
-                <img src="images/Hexing.png" alt="Hexing Logo">       <!-- Corregido: H mayúscula -->
-                <img src="images/Honeywell.png" alt="Honeywell Logo"> <!-- Corregido: H mayúscula -->
-                <img src="images/abb.png" alt="ABB Logo">
-                <img src="images/gacia.png" alt="Gacia Logo">
-                <img src="images/itechene.png" alt="iTechene Logo">
-                <img src="images/rish.png" alt="Rishabh Instruments Logo"> <!-- Corregido: rish.png -->
-                <img src="images/sigma.png" alt="Sigma Elektrik Logo">
-            </div>
-            <!-- Duplicado para efecto infinito (también corregido) -->
-            <div class="brands-slide">
-                <img src="images/Hexing.png" alt="Hexing Logo">
-                <img src="images/Honeywell.png" alt="Honeywell Logo">
-                <img src="images/abb.png" alt="ABB Logo">
-                <img src="images/gacia.png" alt="Gacia Logo">
-                <img src="images/itechene.png" alt="iTechene Logo">
-                <img src="images/rish.png" alt="Rishabh Instruments Logo">
-                <img src="images/sigma.png" alt="Sigma Elektrik Logo">
-            </div>
-        </div>
-    </div>
-</section>
 
-    
+        <!-- ======================= SECCIÓN DE MARCAS DESTACADAS ======================= -->
+        <section class="brands-section" data-aos="fade-up">
+            <div class="container">
+                <!-- Usamos tu color rojo de marca para el título -->
+                <h2 class="section-title" style="color: var(--secondary-color);">Marcas Destacadas</h2>
+                <div class="brands-container">
+                    <div class="brands-slide">
+                        <!-- Rutas corregidas para que coincidan con tus archivos en la carpeta /images -->
+                        <img src="images/Hexing.png" alt="Hexing Logo"> <!-- Corregido: H mayúscula -->
+                        <img src="images/Honeywell.png" alt="Honeywell Logo"> <!-- Corregido: H mayúscula -->
+                        <img src="images/abb.png" alt="ABB Logo">
+                        <img src="images/gacia.png" alt="Gacia Logo">
+                        <img src="images/itechene.png" alt="iTechene Logo">
+                        <img src="images/rish.png" alt="Rishabh Instruments Logo"> <!-- Corregido: rish.png -->
+                        <img src="images/sigma.png" alt="Sigma Elektrik Logo">
+                    </div>
+                    <!-- Duplicado para efecto infinito (también corregido) -->
+                    <div class="brands-slide">
+                        <img src="images/Hexing.png" alt="Hexing Logo">
+                        <img src="images/Honeywell.png" alt="Honeywell Logo">
+                        <img src="images/abb.png" alt="ABB Logo">
+                        <img src="images/gacia.png" alt="Gacia Logo">
+                        <img src="images/itechene.png" alt="iTechene Logo">
+                        <img src="images/rish.png" alt="Rishabh Instruments Logo">
+                        <img src="images/sigma.png" alt="Sigma Elektrik Logo">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
         <!-- ======================= SECCIÓN DE CATEGORÍAS (CARRUSEL) ======================= -->
         <section class="category-carousel-section">
             <div class="category-title-container" data-aos="fade-up">
@@ -203,8 +206,7 @@
         <section id="nosotros" class="about-section">
             <div class="container" data-aos="fade-up">
                 <div class="about-image">
-                    <img src="images/nosotros.jpeg"
-                        alt="Equipo de Andet">
+                    <img src="images/nosotros.jpeg" alt="Equipo de Andet">
                 </div>
                 <div class="about-text">
                     <h2>Innovación y Experiencia a tu Servicio</h2>
