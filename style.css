@@ -92,14 +92,23 @@ img { max-width: 100%; height: auto; }
     transform: scale(1.15);
 }
 
+/* --- ESTILOS PARA EL HEADER FIJO Y ANIMADO --- */
+#sticky-header-wrapper {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Un fondo blanco es importante para que el contenido de abajo no se transparente */
+    background-color: var(--text-color-light); 
+    /* Añadimos una sombra para que se vea "despegado" al hacer scroll */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
 /* Header Principal (Logo, Navegación, Carrito) */
 .header {
     background-color: var(--text-color-light);
-    box-shadow: var(--shadow-soft);
     padding: 1.2rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
 .header-main-container {
